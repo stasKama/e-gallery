@@ -1,0 +1,109 @@
+﻿.form-login-user {
+    width: 400px;
+    height: 250px;
+}
+
+.form-registration-user {
+    width: 600px;
+    height: 400px;
+}
+
+.form-registration-user, .form-login-user {
+    color: #44678f;
+    font-family: Arial;
+    font-size: 15px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    display: inline-block;
+}
+
+.field {
+    text-align: left;
+    margin: 15px;
+}
+
+.lable {
+    display: inline-block;
+    width: 120px;
+}
+
+.input,.message,.password {
+    display: inline-block;
+}
+
+.input {
+    width: 180px;
+}
+
+.message {
+     width: 200px;
+}
+
+.password {
+    width: 146px;
+}
+
+.decoration-message {
+    color: #ff0000;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+.password-view {
+    padding-right: 30px;
+}
+
+.field-password {
+    position: relative;
+}
+
+.view {
+    position: absolute;
+    top: 0;
+    right: -45px;
+    width: 37px;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.view>i {
+    padding:2px;
+}
+
+.view:hover {
+    opacity: 0.9;
+}
+
+.button-form {
+
+}
+
+.button-form>a {
+    text-decoration: none;
+    padding: 10px;
+    color:#44678f;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+.button-form>input {
+    width: 130px;
+    height: 25px;
+    background-color: #44678f;
+    color: #feffff;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: 0 !important;
+    border: none;
+}
+
+.button-form>a:hover {
+    text-decoration: underline;
+}
+
+.button-form>input:hover {
+    background-color: #637d97;
+}

@@ -1,0 +1,138 @@
+﻿html, body {
+    height: 100%;
+}
+
+html {
+    min-width: 800px;
+    min-height: 500px; 
+}
+
+header {
+    background-color: #44678f;
+    height: 65px;
+    box-shadow: 0 2px 1px #eee; 
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+header>a {
+    padding: 10px;
+    text-decoration: none;
+}
+
+header h1 {
+    margin: 10px;
+    padding-left: 150px;
+    font-size: 40px;
+    font-family: 'Monotype Corsiva';
+    color: #feffff;
+    text-transform: uppercase;
+    float: left;
+    cursor: pointer;
+}
+
+main {
+    flex: 1;  
+    background-color: #fafbfc;
+    padding-left: 15px;
+    padding-right: 15px;
+    min-height: calc(100% - 115px); 
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    height: 40px;
+    background-color: #44678f;
+    color: #2c2726;
+    cursor: default
+}
+
+footer div {
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #feffff;
+}
+
+.scrollup {
+    width: 40px;
+    opacity: 0.4;
+    height: 40px;
+    position: fixed;
+    bottom: 70px;
+    left: 70px;
+    display: none;
+    background: url('icon_top.png');
+}
+
+#menu {
+    display: inline;
+    width: 200px;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#link-menu>li {
+    list-style: none;
+    padding: 7px;
+}
+
+#link-menu>li>a {
+    text-decoration: none;
+    color: rgba(68, 103, 143, 0.7);
+    font-family: Arial;
+    font-size: 15px;
+}
+
+#link-menu>li>a>i {
+    padding-right: 10px;
+}
+
+#link-menu>li:hover a {
+    color: rgba(68, 103, 143, 1);
+}
+
+#link-menu>li:hover {
+    background-color: #d1d9e0;
+}
+
+.fixed{
+    position: fixed;
+    top: 0px;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+}
+
+#content {
+    left: 240px;
+    width: calc(100% - 240px);
+    float: right;
+    font-family: Arial;
+    font-size: 15px;
+    text-align: center;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}

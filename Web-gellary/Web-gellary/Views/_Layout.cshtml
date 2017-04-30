@@ -3,11 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css" />
+    <link href="~/Styles/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/layout.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="~/Scripts/scrollup.js"></script>
+    @RenderSection("head", required: false)
 </head>
 <body>
-    @RenderBody()
+    <header class="clearfix">
+        <a href="/Home/Index"><h1>E-Gallery</h1></a>
+    </header>
+    <main class="clearfix">
+        @RenderBody()
+    </main>
+    <a href="#" class="scrollup"></a>
+    <footer>
+        <div>&copy;Kama, 2017</div>
+    </footer>   
 </body>
 </html>

@@ -84,6 +84,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -125,11 +127,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="App_Data\Gellary.mdf" />
+    <Content Include="App_Data\Gellary_log.ldf">
+      <DependentUpon>Gellary.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\EGellaryModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EGellaryModel.edmx</DependentUpon>
+      <LastGenOutput>EGellaryModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EGellaryModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EGellaryModel.edmx</DependentUpon>
+      <LastGenOutput>EGellaryModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\password.js" />
+    <Content Include="Scripts\scrollup.js" />
+    <Content Include="Styles\layout.css" />
+    <Content Include="Styles\login.css" />
+    <Content Include="Styles\normalize.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -137,11 +155,46 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\WorkController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\Answers.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommentsToImages.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EGellaryModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EGellaryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EGellaryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EGellaryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EGellaryModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Images.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LikesToImages.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SiteRole.cs" />
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Verification.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -152,10 +205,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Image\Index.cshtml" />
+    <EntityDeploy Include="Models\EGellaryModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EGellaryModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EGellaryModel.edmx.diagram">
+      <DependentUpon>EGellaryModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\Home.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Gallery\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -164,15 +225,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Contents\" />
-    <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
-    <Folder Include="Views\Account\" />
+    <Folder Include="Images\avatar\" />
+    <Folder Include="Images\expectation\" />
+    <Folder Include="Images\gellary\" />
     <Folder Include="Views\Error\" />
-    <Folder Include="Views\Gallery\" />
-    <Folder Include="Views\Image\" />
     <Folder Include="Views\Work\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
