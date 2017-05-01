@@ -5,9 +5,13 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
+@section head {
+    <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
+}
+
 <div id="menu">
     <ul id="link-menu">
-        <li><a href=""><i class="fa fa-user"></i>Profile</a></li>
+        <li><a href="/Gallery/Home/@Model.UserURL"><i class="fa fa-user"></i>Profile</a></li>
         <li><a href=""><i class="fa fa-users"></i>Users</a></li>
         <li><a href=""><i class="fa fa-history"></i>History</a></li>
         @if (Model.Role == "User")
@@ -23,13 +27,20 @@
 </div>
 <div id="content">
     <div class="user-information">
+        <div>
+            <img class="avatar-user" src="@Model.Avatar" />
+            @Model.Nick
+        </div>
         @if (Model.UserURL == User.Identity.Name)
         {
-            @Model.Email
-            @Model.Nick
+            <div>
+                <a href="" class="">Editing profile</a>
+                <a href="/Image/UploadImage" class="">Upload image</a>
+            </div>
         }
+        <hr/>
     </div>
     <div class="user-gallery">
-        @Model.UserURL
+        
     </div>
 </div>

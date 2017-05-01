@@ -19,7 +19,7 @@ namespace Web_gellary.Models
         public int ImageId { get; set; }
         public string Text { get; set; }
     
-        public virtual Images Images { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Images Images { get; set; }
     }
 }

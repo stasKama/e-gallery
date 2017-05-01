@@ -37,9 +37,8 @@ namespace Web_gellary.Controllers
                         user.State = "online";
                         db.SaveChanges();
                         FormsAuthentication.SetAuthCookie(user.UserURL, false);
-                       // return RedirectToAction("Home", "Gallery");
                         return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
-    new { controller = "Gallery", action = "Main", Id = user.UserURL }));
+                            new { controller = "Gallery", action = "Main", Id = user.UserURL }));
                     }
                     else
                     {
@@ -95,6 +94,10 @@ namespace Web_gellary.Controllers
         [Authorize]
         public ActionResult Logout()
         {
+            EGellaryEntities db = new EGellaryEntities();
+            var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
+            user.State = "no-online";
+            db.SaveChanges();
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }

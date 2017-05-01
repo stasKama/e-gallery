@@ -27,9 +27,10 @@ namespace Web_gellary.Models
     
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<CommentsToImages> CommentsToImages { get; set; }
-        public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<LikesToImages> LikesToImages { get; set; }
         public virtual DbSet<Verification> Verification { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Images> Images { get; set; }
+        public virtual DbSet<VerificationUser> VerificationUser { get; set; }
     }
 }

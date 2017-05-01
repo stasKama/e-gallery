@@ -29,7 +29,7 @@
     <Property Name="DateUpload" Type="date" />
     <Property Name="CountView" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Verification" Type="bit" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <EntityType Name="LikesToImages">
     <Key>
@@ -54,6 +54,14 @@
     <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Verification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="VerificationCode" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VerificationUser">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -145,6 +153,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Verificat__UserI__02FC7413">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="VerificationUser" Type="Self.VerificationUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VerificationUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Verificat__UserI__5070F446">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Verification" Type="Self.Verification" Multiplicity="*" />
@@ -164,6 +184,7 @@
     <EntitySet Name="LikesToImages" EntityType="Self.LikesToImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verification" EntityType="Self.Verification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VerificationUser" EntityType="Self.VerificationUser" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Answers__ImageId__440B1D61" Association="Self.FK__Answers__ImageId__440B1D61">
       <End Role="Images" EntitySet="Images" />
       <End Role="Answers" EntitySet="Answers" />
@@ -191,6 +212,10 @@
     <AssociationSet Name="FK__LikesToIm__UserI__4F7CD00D" Association="Self.FK__LikesToIm__UserI__4F7CD00D">
       <End Role="Users" EntitySet="Users" />
       <End Role="LikesToImages" EntitySet="LikesToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Verificat__UserI__02FC7413" Association="Self.FK__Verificat__UserI__02FC7413">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="VerificationUser" EntitySet="VerificationUser" />
     </AssociationSet>
     <AssociationSet Name="FK__Verificat__UserI__5070F446" Association="Self.FK__Verificat__UserI__5070F446">
       <End Role="Users" EntitySet="Users" />

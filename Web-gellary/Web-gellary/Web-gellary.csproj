@@ -131,7 +131,6 @@
     <Content Include="App_Data\Gellary_log.ldf">
       <DependentUpon>Gellary.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\EGellaryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -145,9 +144,12 @@
     </Content>
     <Content Include="Scripts\password.js" />
     <Content Include="Scripts\scrollup.js" />
+    <Content Include="Scripts\upload-image.js" />
     <Content Include="Styles\layout.css" />
     <Content Include="Styles\login.css" />
     <Content Include="Styles\normalize.css" />
+    <Content Include="Styles\profile-user.css" />
+    <Content Include="Styles\upload-image-form.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +198,9 @@
     <Compile Include="Models\Verification.cs">
       <DependentUpon>EGellaryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VerificationUser.cs">
+      <DependentUpon>EGellaryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -205,8 +210,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\_Layout.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Image\Index.cshtml" />
     <EntityDeploy Include="Models\EGellaryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EGellaryModel.Designer.cs</LastGenOutput>
@@ -214,9 +217,10 @@
     <Content Include="Models\EGellaryModel.edmx.diagram">
       <DependentUpon>EGellaryModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Account\Home.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Gallery\Home.cshtml" />
+    <Content Include="Views\Image\UploadImage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +232,6 @@
     <Folder Include="Images\avatar\" />
     <Folder Include="Images\expectation\" />
     <Folder Include="Images\gellary\" />
-    <Folder Include="Views\Error\" />
     <Folder Include="Views\Work\" />
   </ItemGroup>
   <ItemGroup>

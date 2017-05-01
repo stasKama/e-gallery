@@ -14,7 +14,6 @@ namespace Web_gellary.Controllers
         {
             EGellaryEntities db = new EGellaryEntities();
             Users user = db.Users.FirstOrDefault(u => u.UserURL == id);
-            user.Password = "";
             return View(user);
         }
     }

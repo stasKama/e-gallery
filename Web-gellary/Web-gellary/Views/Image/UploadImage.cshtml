@@ -1,0 +1,51 @@
+﻿@model Web_gellary.Models.Users
+
+@{
+    ViewBag.Title = "Upload Image";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section head {
+    <script src="~/Scripts/upload-image.js"></script>
+    <link href="~/Styles/upload-image-form.css" rel="stylesheet" type="text/css" />
+}
+
+<div id="menu">
+    <ul id="link-menu">
+        <li><a href="/Gallery/Home/@Model.UserURL"><i class="fa fa-user"></i>Profile</a></li>
+        <li><a href=""><i class="fa fa-users"></i>Users</a></li>
+        <li><a href=""><i class="fa fa-history"></i>History</a></li>
+        @if (Model.Role == "User")
+        {
+            <li><a href=""><i class="fa fa-bell-o"></i>Answers</a></li>
+        }
+        else
+        {
+            <li><a href=""><i class="fa fa-comment-o"></i>Query</a></li>
+        }
+        <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+    </ul>
+</div>
+<div id="content">
+    @using (Html.BeginForm("AddImage", "Image", new { enctype = "multipart/form-data" }, FormMethod.Post, htmlAttributes: new { @class = "form-upload-image" }))
+    {
+        <h4>Upload Image</h4>
+        <hr />
+        <div class="left-div">
+            <div class="field-choose-file">
+                <label id="lable-file"><input type="file" name="file" id="file" multiple accept="image/*" /><i class="fa fa-file-image-o"></i>Choose image</label>
+            </div>
+            <div class="field-submit">
+                <input type="submit" id="upload" value="Upload" disabled/>
+            </div>
+            <div class="field-message">
+                <span id="message"></span>
+            </div>
+        </div>
+        <div class="right-div">
+            <div class="field-preview-image">
+                <img id="preview" />
+            </div>
+        </div>
+    }
+</div>

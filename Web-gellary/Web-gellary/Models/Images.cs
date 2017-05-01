@@ -22,6 +22,7 @@ namespace Web_gellary.Models
             this.LikesToImages = new HashSet<LikesToImages>();
             this.DateUpload = DateTime.Now;
             this.CountView = 0;
+            this.Code = "upload";
         }
     
         public int Id { get; set; }
@@ -30,14 +31,14 @@ namespace Web_gellary.Models
         public Nullable<System.DateTime> DateUpload { get; set; }
         public int CountView { get; set; }
         public int UserId { get; set; }
-        public bool Verification { get; set; }
+        public string Code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answers> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommentsToImages> CommentsToImages { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LikesToImages> LikesToImages { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

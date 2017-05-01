@@ -1,0 +1,103 @@
+﻿.vertical-image {
+    height: 300px;
+    width: 100%;
+}
+
+.horizontal-image {
+    width: 400px;
+    height: 100%;
+}
+
+#file {
+    display : none;
+}
+
+#lable-file {
+    background-color: #44678f;
+    color: #feffff;
+    padding : 10px 20px;
+    max-height: 37px;
+    max-width: 155px;
+    cursor : pointer;
+}
+
+#lable-file>i {
+    padding-right: 5px;
+}
+
+.form-upload-image {
+    position: relative;
+    display: inline-block;
+    color: #44678f;
+    font-family: Arial;
+    font-size: 15px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: inline-block;
+    border: 1px solid #44678f;
+    height: 470px;
+    width: 700px;
+}
+
+.left-div {
+    position: absolute;
+    height: 350px;
+    width: 200px;
+    left:10px;
+    top: 30px;
+}
+
+.right-div {
+    position: absolute;
+    height: 350px;
+    width: 470px;
+    right:10px;
+    top: 60px;
+}
+
+.field-choose-file {
+    margin-top: 50%;
+    height: 100px;
+    width: 100%;
+}
+
+.field-submit {
+    
+}
+
+.field-message {
+    padding-top: 30px;
+}
+
+#upload {
+    width: 130px;
+    height: 25px;
+    color: #feffff;
+    padding-left: 20px;
+    padding-right: 20px;
+    outline: 0 !important;
+    border: none;
+}
+
+.field-preview-image {
+    position:absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.no-choose-file {
+    opacity: 0.7;
+}
+
+.choose-file {
+    opacity: 1;
+}
+
+.no-active-submit {
+     background-color: #a3a3a3;
+}
+
+.active-submit {
+    background-color: #44678f;
+    cursor: pointer;
+}

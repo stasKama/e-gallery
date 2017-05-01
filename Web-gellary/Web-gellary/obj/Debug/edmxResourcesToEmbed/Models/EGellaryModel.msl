@@ -22,19 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="EGellaryModel.Images">
-        <MappingFragment StoreEntitySet="Images">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Expansion" ColumnName="Expansion" />
-          <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
-          <ScalarProperty Name="CountView" ColumnName="CountView" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Verification" ColumnName="Verification" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LikesToImages">
       <EntityTypeMapping TypeName="EGellaryModel.LikesToImages">
         <MappingFragment StoreEntitySet="LikesToImages">
@@ -64,6 +51,28 @@
           <ScalarProperty Name="Nick" ColumnName="Nick" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="UserURL" ColumnName="UserURL" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="EGellaryModel.Images">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CountView" ColumnName="CountView" />
+          <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
+          <ScalarProperty Name="Expansion" ColumnName="Expansion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VerificationUser">
+      <EntityTypeMapping TypeName="EGellaryModel.VerificationUser">
+        <MappingFragment StoreEntitySet="VerificationUser">
+          <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

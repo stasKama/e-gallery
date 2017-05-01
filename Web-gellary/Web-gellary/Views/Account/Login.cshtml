@@ -3,9 +3,13 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/_Layout.cshtml";
+}
+
+@section head {
     <link href="~/Styles/login.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/password.js"></script>
 }
+
 <div id="menu">
     <ul id="link-menu">
         <li><a href="/Account/Login"><i class="fa fa-sign-in"></i>Login</a></li>
@@ -24,7 +28,7 @@
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
             </div>
             <div class="input">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder="Email", @class = "" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "" } })
             </div>
         </div>
 
@@ -40,7 +44,7 @@
             </div>
         </div>
         <div class="button-form">
-            <input type="submit" value="Login"/>
+            <input type="submit" value="Login" />
             <a href="@Url.Action("Registration", "Account")">Registration</a>
         </div>
     }

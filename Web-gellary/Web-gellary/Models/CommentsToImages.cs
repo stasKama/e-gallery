@@ -25,7 +25,7 @@ namespace Web_gellary.Models
         public string Comment { get; set; }
         public Nullable<System.DateTime> DateComment { get; set; }
     
-        public virtual Images Images { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Images Images { get; set; }
     }
 }

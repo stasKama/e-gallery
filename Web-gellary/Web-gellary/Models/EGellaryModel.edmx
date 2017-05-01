@@ -34,7 +34,7 @@
           <Property Name="DateUpload" Type="date" />
           <Property Name="CountView" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Verification" Type="bit" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="LikesToImages">
           <Key>
@@ -59,6 +59,14 @@
           <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Verification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="VerificationCode" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VerificationUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -150,6 +158,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Verificat__UserI__02FC7413">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="VerificationUser" Type="Self.VerificationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VerificationUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Verificat__UserI__5070F446">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Verification" Type="Self.Verification" Multiplicity="*" />
@@ -169,6 +189,7 @@
           <EntitySet Name="LikesToImages" EntityType="Self.LikesToImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verification" EntityType="Self.Verification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VerificationUser" EntityType="Self.VerificationUser" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Answers__ImageId__440B1D61" Association="Self.FK__Answers__ImageId__440B1D61">
             <End Role="Images" EntitySet="Images" />
             <End Role="Answers" EntitySet="Answers" />
@@ -197,6 +218,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="LikesToImages" EntitySet="LikesToImages" />
           </AssociationSet>
+          <AssociationSet Name="FK__Verificat__UserI__02FC7413" Association="Self.FK__Verificat__UserI__02FC7413">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerificationUser" EntitySet="VerificationUser" />
+          </AssociationSet>
           <AssociationSet Name="FK__Verificat__UserI__5070F446" Association="Self.FK__Verificat__UserI__5070F446">
             <End Role="Users" EntitySet="Users" />
             <End Role="Verification" EntitySet="Verification" />
@@ -214,8 +239,8 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ImageId" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Images" Relationship="Self.FK__Answers__ImageId__440B1D61" FromRole="Answers" ToRole="Images" />
           <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__Answers__UserId__5165187F" FromRole="Answers" ToRole="Users" />
+          <NavigationProperty Name="Images" Relationship="EGellaryModel.FK__Answers__ImageId__440B1D61" FromRole="Answers" ToRole="Images" />
         </EntityType>
         <EntityType Name="CommentsToImages">
           <Key>
@@ -226,24 +251,8 @@
           <Property Name="ImageId" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateComment" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Images" Relationship="Self.FK__CommentsT__Image__3B75D760" FromRole="CommentsToImages" ToRole="Images" />
           <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__CommentsT__UserI__4E88ABD4" FromRole="CommentsToImages" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="Images">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="9" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Expansion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DateUpload" Type="DateTime" Precision="0" />
-          <Property Name="CountView" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Verification" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Answers" Relationship="Self.FK__Answers__ImageId__440B1D61" FromRole="Images" ToRole="Answers" />
-          <NavigationProperty Name="CommentsToImages" Relationship="Self.FK__CommentsT__Image__3B75D760" FromRole="Images" ToRole="CommentsToImages" />
-          <NavigationProperty Name="LikesToImages" Relationship="Self.FK__LikesToIm__Image__3F466844" FromRole="Images" ToRole="LikesToImages" />
-          <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__Images__UserId__4D94879B" FromRole="Images" ToRole="Users" />
+          <NavigationProperty Name="Images" Relationship="EGellaryModel.FK__CommentsT__Image__3B75D760" FromRole="CommentsToImages" ToRole="Images" />
         </EntityType>
         <EntityType Name="LikesToImages">
           <Key>
@@ -252,8 +261,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ImageId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Images" Relationship="Self.FK__LikesToIm__Image__3F466844" FromRole="LikesToImages" ToRole="Images" />
           <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__LikesToIm__UserI__4F7CD00D" FromRole="LikesToImages" ToRole="Users" />
+          <NavigationProperty Name="Images" Relationship="EGellaryModel.FK__LikesToIm__Image__3F466844" FromRole="LikesToImages" ToRole="Images" />
         </EntityType>
         <EntityType Name="Verification">
           <Key>
@@ -264,60 +273,11 @@
           <Property Name="VerificationCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__Verificat__UserI__5070F446" FromRole="Verification" ToRole="Users" />
         </EntityType>
-        <Association Name="FK__Answers__ImageId__440B1D61">
-          <End Role="Images" Type="Self.Images" Multiplicity="1" />
-          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Answers">
-              <PropertyRef Name="ImageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CommentsT__Image__3B75D760">
-          <End Role="Images" Type="Self.Images" Multiplicity="1" />
-          <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CommentsToImages">
-              <PropertyRef Name="ImageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LikesToIm__Image__3F466844">
-          <End Role="Images" Type="Self.Images" Multiplicity="1" />
-          <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LikesToImages">
-              <PropertyRef Name="ImageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="EGellaryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Answers" EntityType="Self.Answers" />
           <EntitySet Name="CommentsToImages" EntityType="Self.CommentsToImages" />
-          <EntitySet Name="Images" EntityType="Self.Images" />
           <EntitySet Name="LikesToImages" EntityType="Self.LikesToImages" />
           <EntitySet Name="Verification" EntityType="Self.Verification" />
-          <AssociationSet Name="FK__Answers__ImageId__440B1D61" Association="Self.FK__Answers__ImageId__440B1D61">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="Answers" EntitySet="Answers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CommentsT__Image__3B75D760" Association="Self.FK__CommentsT__Image__3B75D760">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="CommentsToImages" EntitySet="CommentsToImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LikesToIm__Image__3F466844" Association="Self.FK__LikesToIm__Image__3F466844">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="LikesToImages" EntitySet="LikesToImages" />
-          </AssociationSet>
           <EntitySet Name="Users" EntityType="EGellaryModel.Users" />
           <AssociationSet Name="FK__Answers__UserId__5165187F" Association="EGellaryModel.FK__Answers__UserId__5165187F">
             <End Role="Users" EntitySet="Users" />
@@ -327,10 +287,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="CommentsToImages" EntitySet="CommentsToImages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Images__UserId__4D94879B" Association="EGellaryModel.FK__Images__UserId__4D94879B">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Images" EntitySet="Images" />
-          </AssociationSet>
           <AssociationSet Name="FK__LikesToIm__UserI__4F7CD00D" Association="EGellaryModel.FK__LikesToIm__UserI__4F7CD00D">
             <End Role="Users" EntitySet="Users" />
             <End Role="LikesToImages" EntitySet="LikesToImages" />
@@ -338,6 +294,28 @@
           <AssociationSet Name="FK__Verificat__UserI__5070F446" Association="EGellaryModel.FK__Verificat__UserI__5070F446">
             <End Role="Users" EntitySet="Users" />
             <End Role="Verification" EntitySet="Verification" />
+          </AssociationSet>
+          <EntitySet Name="Images" EntityType="EGellaryModel.Images" />
+          <EntitySet Name="VerificationUser" EntityType="EGellaryModel.VerificationUser" />
+          <AssociationSet Name="FK__Answers__ImageId__440B1D61" Association="EGellaryModel.FK__Answers__ImageId__440B1D61">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommentsT__Image__3B75D760" Association="EGellaryModel.FK__CommentsT__Image__3B75D760">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="CommentsToImages" EntitySet="CommentsToImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Images__UserId__4D94879B" Association="EGellaryModel.FK__Images__UserId__4D94879B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikesToIm__Image__3F466844" Association="EGellaryModel.FK__LikesToIm__Image__3F466844">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="LikesToImages" EntitySet="LikesToImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Verificat__UserI__02FC7413" Association="EGellaryModel.FK__Verificat__UserI__02FC7413">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerificationUser" EntitySet="VerificationUser" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Users">
@@ -355,9 +333,10 @@
           <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Answers" Relationship="EGellaryModel.FK__Answers__UserId__5165187F" FromRole="Users" ToRole="Answers" />
           <NavigationProperty Name="CommentsToImages" Relationship="EGellaryModel.FK__CommentsT__UserI__4E88ABD4" FromRole="Users" ToRole="CommentsToImages" />
-          <NavigationProperty Name="Images" Relationship="EGellaryModel.FK__Images__UserId__4D94879B" FromRole="Users" ToRole="Images" />
           <NavigationProperty Name="LikesToImages" Relationship="EGellaryModel.FK__LikesToIm__UserI__4F7CD00D" FromRole="Users" ToRole="LikesToImages" />
           <NavigationProperty Name="Verification" Relationship="EGellaryModel.FK__Verificat__UserI__5070F446" FromRole="Users" ToRole="Verification" />
+          <NavigationProperty Name="Images" Relationship="EGellaryModel.FK__Images__UserId__4D94879B" FromRole="Users" ToRole="Images" />
+          <NavigationProperty Name="VerificationUser" Relationship="EGellaryModel.FK__Verificat__UserI__02FC7413" FromRole="Users" ToRole="VerificationUser" />
         </EntityType>
         <Association Name="FK__Answers__UserId__5165187F">
           <End Type="EGellaryModel.Users" Role="Users" Multiplicity="1" />
@@ -379,18 +358,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CommentsToImages">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Images__UserId__4D94879B">
-          <End Type="EGellaryModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="EGellaryModel.Images" Role="Images" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Images">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -419,6 +386,91 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="9" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Expansion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateUpload" Type="DateTime" Precision="0" />
+          <Property Name="CountView" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Answers" Relationship="EGellaryModel.FK__Answers__ImageId__440B1D61" FromRole="Images" ToRole="Answers" />
+          <NavigationProperty Name="CommentsToImages" Relationship="EGellaryModel.FK__CommentsT__Image__3B75D760" FromRole="Images" ToRole="CommentsToImages" />
+          <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__Images__UserId__4D94879B" FromRole="Images" ToRole="Users" />
+          <NavigationProperty Name="LikesToImages" Relationship="EGellaryModel.FK__LikesToIm__Image__3F466844" FromRole="Images" ToRole="LikesToImages" />
+        </EntityType>
+        <EntityType Name="VerificationUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="VerificationCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="EGellaryModel.FK__Verificat__UserI__02FC7413" FromRole="VerificationUser" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK__Answers__ImageId__440B1D61">
+          <End Type="EGellaryModel.Images" Role="Images" Multiplicity="1" />
+          <End Type="EGellaryModel.Answers" Role="Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommentsT__Image__3B75D760">
+          <End Type="EGellaryModel.Images" Role="Images" Multiplicity="1" />
+          <End Type="EGellaryModel.CommentsToImages" Role="CommentsToImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommentsToImages">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Images__UserId__4D94879B">
+          <End Type="EGellaryModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="EGellaryModel.Images" Role="Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikesToIm__Image__3F466844">
+          <End Type="EGellaryModel.Images" Role="Images" Multiplicity="1" />
+          <End Type="EGellaryModel.LikesToImages" Role="LikesToImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LikesToImages">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Verificat__UserI__02FC7413">
+          <End Type="EGellaryModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="EGellaryModel.VerificationUser" Role="VerificationUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VerificationUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -443,19 +495,6 @@
                 <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="DateComment" ColumnName="DateComment" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="EGellaryModel.Images">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Expansion" ColumnName="Expansion" />
-                <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
-                <ScalarProperty Name="CountView" ColumnName="CountView" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Verification" ColumnName="Verification" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -488,6 +527,28 @@
                 <ScalarProperty Name="Nick" ColumnName="Nick" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserURL" ColumnName="UserURL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="EGellaryModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CountView" ColumnName="CountView" />
+                <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
+                <ScalarProperty Name="Expansion" ColumnName="Expansion" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VerificationUser">
+            <EntityTypeMapping TypeName="EGellaryModel.VerificationUser">
+              <MappingFragment StoreEntitySet="VerificationUser">
+                <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

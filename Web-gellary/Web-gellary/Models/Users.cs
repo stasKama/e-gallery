@@ -19,13 +19,13 @@ namespace Web_gellary.Models
         {
             this.Answers = new HashSet<Answers>();
             this.CommentsToImages = new HashSet<CommentsToImages>();
-            this.Images = new HashSet<Images>();
             this.LikesToImages = new HashSet<LikesToImages>();
             this.Verification = new HashSet<Verification>();
+            this.Images = new HashSet<Images>();
+            this.VerificationUser = new HashSet<VerificationUser>();
             this.Avatar = "http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png";
             this.State = "online";
             this.Permission = 10;
-            this.Role = "User";
         }
     
         public int Id { get; set; }
@@ -43,10 +43,12 @@ namespace Web_gellary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommentsToImages> CommentsToImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Images> Images { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LikesToImages> LikesToImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Verification> Verification { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Images> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VerificationUser> VerificationUser { get; set; }
     }
 }
