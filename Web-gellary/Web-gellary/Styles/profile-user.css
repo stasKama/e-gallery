@@ -30,3 +30,25 @@
     width: 40%;
     height: 220px;
 }
+
+
+
+.image-to-width {
+    width: 250px;
+    height: 100%;
+}
+
+.image-to-height {
+    height: 200px;
+    width: 100%;
+}
+
+.block-image {
+    display: inline-block;
+    width: 270px; 
+    height: 210px;
+    margin: 0 15px 15px 0; 
+    padding: 10px 0; 
+    text-align: center; 
+    border: 1px solid #44678f;
+}

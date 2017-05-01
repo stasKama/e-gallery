@@ -9,12 +9,52 @@ namespace Web_gellary.Controllers
 {
     public class GalleryController : Controller
     {
+        private static string UserId;
+
         [Authorize]
         public ActionResult Home(string id)
         {
+            UserId = id;
             EGellaryEntities db = new EGellaryEntities();
             Users user = db.Users.FirstOrDefault(u => u.UserURL == id);
             return View(user);
+        }
+
+        [HttpPost]
+        public JsonResult GetImages()
+        {
+            var id =  Int32.Parse(UserId);
+            List<string> imagesUrl = new List<string>();
+            using (EGellaryEntities db = new EGellaryEntities())
+            {
+                foreach (var img in db.Images.Where(im => im.UserId == id && im.Code == "view"))
+                {
+                    imagesUrl.Add(Url.Content("~/Images/gallery/" + img.Name + "." + img.Expansion));
+                }
+            }
+            imagesUrl.Reverse();
+            return Json(imagesUrl, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetQueryImages()
+        {
+            List<string> imagesUrl = new List<string>();
+            using (EGellaryEntities db = new EGellaryEntities())
+            {
+                foreach (var img in db.Images.Where(im => im.Code == "upload"))
+                {
+                    imagesUrl.Add(Url.Content("~/Images/expectation/" + img.Name + "." + img.Expansion));
+                }
+            }
+            imagesUrl.Reverse();
+            return Json(imagesUrl, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Moderator")]
+        public ActionResult Query()
+        {
+            return View();
         }
     }
 }

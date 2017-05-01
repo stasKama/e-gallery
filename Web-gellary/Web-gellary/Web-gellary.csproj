@@ -142,13 +142,16 @@
       <DependentUpon>EGellaryModel.edmx</DependentUpon>
       <LastGenOutput>EGellaryModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\gallery-user.js" />
     <Content Include="Scripts\password.js" />
+    <Content Include="Scripts\query-image.js" />
     <Content Include="Scripts\scrollup.js" />
     <Content Include="Scripts\upload-image.js" />
     <Content Include="Styles\layout.css" />
     <Content Include="Styles\login.css" />
     <Content Include="Styles\normalize.css" />
     <Content Include="Styles\profile-user.css" />
+    <Content Include="Styles\query-image-user.css" />
     <Content Include="Styles\upload-image-form.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -221,6 +224,7 @@
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Gallery\Home.cshtml" />
     <Content Include="Views\Image\UploadImage.cshtml" />
+    <Content Include="Views\Gallery\Query.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -231,7 +235,7 @@
   <ItemGroup>
     <Folder Include="Images\avatar\" />
     <Folder Include="Images\expectation\" />
-    <Folder Include="Images\gellary\" />
+    <Folder Include="Images\gallery\" />
     <Folder Include="Views\Work\" />
   </ItemGroup>
   <ItemGroup>

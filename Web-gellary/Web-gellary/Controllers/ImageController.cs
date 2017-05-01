@@ -54,5 +54,51 @@ namespace Web_gellary.Controllers
             var serverPath = Server.MapPath("~");
             return Path.Combine(serverPath, "Images", directory, fileName);
         }
+        //#block, #accept
+        [HttpPost]
+        public JsonResult Accect(string UrlImage)
+        {
+            var NameImage = GetNameImage(UrlImage);
+            var Image = ActImage(NameImage, "view");
+            AnswerUser("Accect", Image);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Block(string UrlImage)
+        {
+            var NameImage = GetNameImage(UrlImage);
+            var Image = ActImage(NameImage, "block");
+            AnswerUser("Block", Image);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        private void AnswerUser(string Message, Images Image)
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            Answers answer = new Answers()
+            {
+                UserId = Image.UserId,
+                ImageId = Image.Id
+            };
+            answer.Text = Image.Users.Nick + ", your image: " + Message + ".";
+            db.SaveChanges();
+        }
+
+        private Images ActImage(string NameImage, string Action)
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            var Image = db.Images.FirstOrDefault(im => im.Name == NameImage);
+            Image.Code = Action;
+            db.SaveChanges();
+            return Image;
+        }
+
+        private string GetNameImage(string UrlImage)
+        {
+            var PositionPoint = UrlImage.LastIndexOf(".");
+            var PositionSlash = UrlImage.LastIndexOf("/");
+            return UrlImage.Substring(PositionSlash + 1, PositionPoint);
+        }
     }
 }

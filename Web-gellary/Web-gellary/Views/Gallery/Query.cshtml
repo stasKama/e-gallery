@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Query";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section head {
+    <link href="~/Styles/query-image-user.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/query-image.js"></script>
+}
+
+<div id="menu">
+    <ul id="link-menu">
+        <li><a href="/Gallery/Home/@User.Identity.Name"><i class="fa fa-user"></i>Profile</a></li>
+        <li><a href=""><i class="fa fa-users"></i>Users</a></li>
+        <li><a href=""><i class="fa fa-history"></i>History</a></li>
+        <li><a href=""><i class="fa fa-comment-o"></i>Query</a></li>
+        <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+    </ul>
+</div>
+<div id="content">
+    <h4>Query User</h4>
+    <hr/>
+    <div class="block-user-query">
+        <div class="gallery">
+
+        </div>
+    </div>
+</div>
+
+<div class="block-view-image">
+    <div id="view-image">
+        <div id="block-view-image">
+            <div id="prev-image">&lt;</div>
+            <img id="display-image" class="display-image-to-width" src="" alt="Not image" />
+            <div id="next-image">&gt;</div>
+        </div>
+        <div id="footer-image">
+            <span id="accept">Accept</span>
+            <span id="block">Block</span>
+        </div>
+    </div>
+</div>
