@@ -29,7 +29,7 @@
     <Property Name="DateUpload" Type="date" />
     <Property Name="CountView" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LikesToImages">
     <Key>
@@ -69,7 +69,7 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="VerificationCode" Type="varchar" MaxLength="8" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Answers__ImageId__440B1D61">
+  <Association Name="FK__Answers__ImageId__19DFD96B">
     <End Role="Images" Type="Self.Images" Multiplicity="1" />
     <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
     <ReferentialConstraint>
@@ -93,7 +93,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__Image__3B75D760">
+  <Association Name="FK__CommentsT__Image__17F790F9">
     <End Role="Images" Type="Self.Images" Multiplicity="1" />
     <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -117,7 +117,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Images__UserId__4D94879B">
+  <Association Name="FK__Images__UserId__1AD3FDA4">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Images" Type="Self.Images" Multiplicity="*" />
     <ReferentialConstraint>
@@ -129,7 +129,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__Image__3F466844">
+  <Association Name="FK__LikesToIm__Image__18EBB532">
     <End Role="Images" Type="Self.Images" Multiplicity="1" />
     <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -185,7 +185,7 @@
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verification" EntityType="Self.Verification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VerificationUser" EntityType="Self.VerificationUser" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Answers__ImageId__440B1D61" Association="Self.FK__Answers__ImageId__440B1D61">
+    <AssociationSet Name="FK__Answers__ImageId__19DFD96B" Association="Self.FK__Answers__ImageId__19DFD96B">
       <End Role="Images" EntitySet="Images" />
       <End Role="Answers" EntitySet="Answers" />
     </AssociationSet>
@@ -193,7 +193,7 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Answers" EntitySet="Answers" />
     </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__Image__3B75D760" Association="Self.FK__CommentsT__Image__3B75D760">
+    <AssociationSet Name="FK__CommentsT__Image__17F790F9" Association="Self.FK__CommentsT__Image__17F790F9">
       <End Role="Images" EntitySet="Images" />
       <End Role="CommentsToImages" EntitySet="CommentsToImages" />
     </AssociationSet>
@@ -201,11 +201,11 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="CommentsToImages" EntitySet="CommentsToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__Images__UserId__4D94879B" Association="Self.FK__Images__UserId__4D94879B">
+    <AssociationSet Name="FK__Images__UserId__1AD3FDA4" Association="Self.FK__Images__UserId__1AD3FDA4">
       <End Role="Users" EntitySet="Users" />
       <End Role="Images" EntitySet="Images" />
     </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__Image__3F466844" Association="Self.FK__LikesToIm__Image__3F466844">
+    <AssociationSet Name="FK__LikesToIm__Image__18EBB532" Association="Self.FK__LikesToIm__Image__18EBB532">
       <End Role="Images" EntitySet="Images" />
       <End Role="LikesToImages" EntitySet="LikesToImages" />
     </AssociationSet>

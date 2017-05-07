@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3da6aacf56e54b4ea48b8c99c4995c17" Name="Diagram1">
-        <EntityTypeShape EntityType="EGellaryModel.Answers" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EGellaryModel.CommentsToImages" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EGellaryModel.LikesToImages" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EGellaryModel.Verification" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EGellaryModel.Users" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="EGellaryModel.Answers" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="EGellaryModel.CommentsToImages" Width="1.5" PointX="5.25" PointY="11.625" />
+        <EntityTypeShape EntityType="EGellaryModel.LikesToImages" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="EGellaryModel.Users" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EGellaryModel.Verification" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="EGellaryModel.VerificationUser" Width="1.5" PointX="3" PointY="10.25" />
         <AssociationConnector Association="EGellaryModel.FK__Answers__UserId__5165187F" />
         <AssociationConnector Association="EGellaryModel.FK__CommentsT__UserI__4E88ABD4" />
         <AssociationConnector Association="EGellaryModel.FK__LikesToIm__UserI__4F7CD00D" />
-        <AssociationConnector Association="EGellaryModel.FK__Verificat__UserI__5070F446" />
-        <EntityTypeShape EntityType="EGellaryModel.Images" Width="1.5" PointX="3" PointY="17.625" />
-        <EntityTypeShape EntityType="EGellaryModel.VerificationUser" Width="1.5" PointX="3" PointY="8.125" />
-        <AssociationConnector Association="EGellaryModel.FK__Answers__ImageId__440B1D61" />
-        <AssociationConnector Association="EGellaryModel.FK__CommentsT__Image__3B75D760" />
-        <AssociationConnector Association="EGellaryModel.FK__Images__UserId__4D94879B" />
-        <AssociationConnector Association="EGellaryModel.FK__LikesToIm__Image__3F466844" />
         <AssociationConnector Association="EGellaryModel.FK__Verificat__UserI__02FC7413" />
-        </Diagram>
+        <AssociationConnector Association="EGellaryModel.FK__Verificat__UserI__5070F446" />
+        <EntityTypeShape EntityType="EGellaryModel.Images" Width="1.5" PointX="3" PointY="13.125" />
+        <AssociationConnector Association="EGellaryModel.FK__Answers__ImageId__19DFD96B" />
+        <AssociationConnector Association="EGellaryModel.FK__CommentsT__Image__17F790F9" />
+        <AssociationConnector Association="EGellaryModel.FK__Images__UserId__1AD3FDA4" />
+        <AssociationConnector Association="EGellaryModel.FK__LikesToIm__Image__18EBB532" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

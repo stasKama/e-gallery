@@ -1,0 +1,19 @@
+﻿@model Web_gellary.Models.ViewModel
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@foreach (var item in Model.UsersList)
+{
+    <div>
+        <a href="/Gallery/Home/@item.UserURL">
+            @Html.DisplayFor(modelItem => item.Nick)
+            <img src="@item.Avatar" style="width:50px; height:50px;" />
+        </a>
+        @Html.DisplayFor(modelItem => item.State)
+        @Html.DisplayFor(modelItem => item.Permission)
+        0
+    </div>
+}

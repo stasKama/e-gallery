@@ -1,8 +1,10 @@
 ﻿$(document).ready(function () {
-    $(".view").mouseover(function () {
-        $("#Password").prop("type", "text");
+    $(".view").mousedown(function () {
+        var password = $($(this).parent()).children(".password-view");
+        $(password).prop("type", "text");
     });
-    $(".view").mouseout(function () {
-        $("#Password").prop("type", "password");
+    $(".view").mouseup(function () {
+        var password = $($(this).parent()).children(".password-view");
+        $(password).prop("type", "password");
     });
 });

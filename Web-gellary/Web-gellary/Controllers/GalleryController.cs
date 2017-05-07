@@ -16,8 +16,11 @@ namespace Web_gellary.Controllers
         {
             UserId = id;
             EGellaryEntities db = new EGellaryEntities();
-            Users user = db.Users.FirstOrDefault(u => u.UserURL == id);
-            return View(user);
+            ViewModel model = new ViewModel()
+            {
+                User = db.Users.FirstOrDefault(u => u.UserURL == id)
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -27,7 +30,7 @@ namespace Web_gellary.Controllers
             List<string> imagesUrl = new List<string>();
             using (EGellaryEntities db = new EGellaryEntities())
             {
-                foreach (var img in db.Images.Where(im => im.UserId == id && im.Code == "view"))
+                foreach (var img in db.Images.Where(im => im.UserId == id && im.Status == (int) Status.VIEW))
                 {
                     imagesUrl.Add(Url.Content("~/Images/gallery/" + img.Name + "." + img.Expansion));
                 }
@@ -36,25 +39,15 @@ namespace Web_gellary.Controllers
             return Json(imagesUrl, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public JsonResult GetQueryImages()
+        public ActionResult Users()
         {
-            List<string> imagesUrl = new List<string>();
-            using (EGellaryEntities db = new EGellaryEntities())
+            EGellaryEntities db = new EGellaryEntities();
+            ViewModel model = new ViewModel()
             {
-                foreach (var img in db.Images.Where(im => im.Code == "upload"))
-                {
-                    imagesUrl.Add(Url.Content("~/Images/expectation/" + img.Name + "." + img.Expansion));
-                }
-            }
-            imagesUrl.Reverse();
-            return Json(imagesUrl, JsonRequestBehavior.AllowGet);
-        }
-
-        [Authorize(Roles = "Moderator")]
-        public ActionResult Query()
-        {
-            return View();
+                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name),
+                UsersList = db.Users.ToList()
+            };
+            return View(model);
         }
     }
 }

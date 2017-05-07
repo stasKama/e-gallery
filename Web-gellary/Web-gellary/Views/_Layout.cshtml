@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="~/Scripts/scrollup.js"></script>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (Model.User.Role == "Moderator")
+        {
+            <script src="~/Scripts/count-query.js"></script>
+        }
+        if (Model.User.Role == "User")
+        {
+            <script src="~/Scripts/count-answers.js"></script>
+        }
+    }
     @RenderSection("head", required: false)
 </head>
 <body>
@@ -15,7 +26,34 @@
         <a href="/Home/Index"><h1>E-Gallery</h1></a>
     </header>
     <main class="clearfix">
-        @RenderBody()
+        <div id="menu">
+            <ul id="link-menu">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="/Gallery/Home/@User.Identity.Name"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a href="/Gallery/Users"><i class="fa fa-users"></i>Users</a></li>
+                    <li><a href=""><i class="fa fa-history"></i>History</a></li>
+                    if (Model.User.Role == "User")
+                    {
+                        <li><a href=""><i class="fa fa-bell-o"></i>Answers <span id="count-answer"></span></a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Image/Query"><i class="fa fa-comment-o"></i>Query <span id="count-query"></span></a></li>
+                    }
+                    <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                }
+                else
+                {
+                    <li><a href="/Account/Login"><i class="fa fa-sign-in"></i>Login</a></li>
+                    <li><a href="/Gallery/Users"><i class="fa fa-users"></i>Users</a></li>
+                    <li><a href=""><i class="fa fa-history"></i>History</a></li>
+                }
+            </ul>
+        </div>
+        <div id="content">
+            @RenderBody()
+        </div>
     </main>
     <a href="#" class="scrollup"></a>
     <footer>

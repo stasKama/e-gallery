@@ -10,79 +10,70 @@
     <script src="~/Scripts/password.js"></script>
 }
 
-<div id="menu">
-    <ul id="link-menu">
-        <li><a href="/Account/Login"><i class="fa fa-sign-in"></i>Login</a></li>
-        <li><a href=""><i class="fa fa-users"></i>Users</a></li>
-        <li><a href=""><i class="fa fa-history"></i>History</a></li>
-    </ul>
-</div>
-<div id="content">
-    @using (Html.BeginForm(Html.BeginForm("Registration", "Account", new { enctype = "multipart/form-data" }, FormMethod.Post, htmlAttributes: new { @class = "form-registration-user" })))
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm(Html.BeginForm("Registration", "Account", new { enctype = "multipart/form-data" }, FormMethod.Post, htmlAttributes: new { @class = "form-registration-user" })))
+{
+    @Html.AntiForgeryToken()
 
-        <div class="">
-            <h4>Registration</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "" })
-            <div class="field">
-                <div class="lable">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
-                </div>
-                <div class="input">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "" } })
-                </div>
-                <div class="message">
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "decoration-message" })
-                </div>
+    <div class="">
+        <h4>Registration</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "" })
+        <div class="field">
+            <div class="lable">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
             </div>
-
-            <div class="field">
-                <div class="lable">
-                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "" })
-                </div>
-                <div class="input">
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { placeholder = "Username", @class = "" } })
-                </div>
-                <div class="message">
-                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "decoration-message" })
-                </div>
+            <div class="input">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "" } })
             </div>
-
-            <div class="field">
-                <div class="lable">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "" })
-                </div>
-                <div class="password">
-                    <div class="field-password">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "password-view" } })
-                        <div class="view"><i class="fa fa-eye"></i></div>
-                    </div>
-                </div>
-                <div class="message">
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "decoration-message" })
-                </div>
-            </div>
-
-            <div class="field">
-                <div class="lable">
-                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "" })
-                </div>
-                <div class="password">
-                    <div class="field-password">
-                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = "Confirm Password", @class = "password-view" } })
-                        <div class="view"><i class="fa fa-eye"></i></div>
-                    </div>
-                </div>
-                <div class="message">
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "decoration-message" })
-                </div>
-
-            </div>
-            <div class="button-form">
-                <input type="submit" value="Registration" />
+            <div class="message">
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "decoration-message" })
             </div>
         </div>
-    }
-</div>              
+
+        <div class="field">
+            <div class="lable">
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="input">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { placeholder = "Username", @class = "" } })
+            </div>
+            <div class="message">
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "decoration-message" })
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="lable">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="password">
+                <div class="field-password">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "password-view" } })
+                    <div class="view"><i class="fa fa-eye"></i></div>
+                </div>
+            </div>
+            <div class="message">
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "decoration-message" })
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="lable">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="password">
+                <div class="field-password">
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = "Confirm Password", @class = "password-view" } })
+                    <div class="view"><i class="fa fa-eye"></i></div>
+                </div>
+            </div>
+            <div class="message">
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "decoration-message" })
+            </div>
+
+        </div>
+        <div class="button-form">
+            <input type="submit" value="Registration" />
+        </div>
+    </div>
+}           

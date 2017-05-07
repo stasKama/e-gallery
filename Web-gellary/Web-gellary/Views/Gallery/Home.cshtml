@@ -1,47 +1,34 @@
-﻿@model Web_gellary.Models.Users
+﻿@model Web_gellary.Models.ViewModel
 
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/_Layout.cshtml";
+    <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/view-image.css" rel="stylesheet" type="text/css" />
 }
 
 @section head {
-    <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/gallery-user.js"></script>
 }
 
-<div id="menu">
-    <ul id="link-menu">
-        <li><a href="/Gallery/Home/@Model.UserURL"><i class="fa fa-user"></i>Profile</a></li>
-        <li><a href=""><i class="fa fa-users"></i>Users</a></li>
-        <li><a href=""><i class="fa fa-history"></i>History</a></li>
-        @if (Model.Role == "User")
-        {
-            <li><a href=""><i class="fa fa-bell-o"></i>Answers</a></li>
-        }
-        else
-        {
-            <li><a href="/Gallery/Query"><i class="fa fa-comment-o"></i>Query</a></li>
-        }
-        <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i>Logout</a></li>
-    </ul>
-</div>
-<div id="content">
-    <div class="user-information">
+<div class="user-information">
+    <div>
+        <img class="avatar-user" src="@Model.User.Avatar" />
+        @Model.User.Nick
+    </div>
+    @if (Model.User.UserURL == User.Identity.Name)
+    {
         <div>
-            <img class="avatar-user" src="@Model.Avatar" />
-            @Model.Nick
+            <a href="" class="">Editing profile</a>
+            <a href="/Image/UploadImage" class="">Upload image</a>
         </div>
-        @if (Model.UserURL == User.Identity.Name)
-        {
-            <div>
-                <a href="" class="">Editing profile</a>
-                <a href="/Image/UploadImage" class="">Upload image</a>
-            </div>
-        }
-        <hr/>
-    </div>
-    <div class="user-gallery">
-        
-    </div>
+    }
+    <hr/>
+</div>
+<div class="user-gallery">
+    
+</div>
+
+<div class="block-view-image">
+    <img id="view-image" src="" alt="Not image" />
 </div>

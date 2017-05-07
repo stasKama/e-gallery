@@ -19,7 +19,8 @@ namespace Web_gellary.Controllers
             }
             else
             {
-                return RedirectToAction("Home", "Gallery");
+                return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
+                            new { controller = "Gallery", action = "Home", id = User.Identity.Name }));
             }
         }
 
@@ -38,7 +39,7 @@ namespace Web_gellary.Controllers
                         db.SaveChanges();
                         FormsAuthentication.SetAuthCookie(user.UserURL, false);
                         return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
-                            new { controller = "Gallery", action = "Main", Id = user.UserURL }));
+                            new { controller = "Gallery", action = "Home", id = user.UserURL }));
                     }
                     else
                     {
@@ -58,7 +59,8 @@ namespace Web_gellary.Controllers
             }
             else
             {
-                return RedirectToAction("Home", "Gallery");
+                return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
+                            new { controller = "Gallery", action = "Home", id = User.Identity.Name }));
             }
         }
 
@@ -74,12 +76,13 @@ namespace Web_gellary.Controllers
                     user = db.Users.FirstOrDefault(u => u.Email == account.Email);
                     if (user == null)
                     {
-                        user = new Users { Email = account.Email, Password = account.Password, Nick = account.Username };
+                        user = new Users() { Email = account.Email, Password = account.Password, Nick = account.Username };
                         db.Users.Add(user);
                         db.SaveChanges();
                         FormsAuthentication.SetAuthCookie(user.UserURL, false);
                         ModelState.Clear();
-                        return RedirectToAction("Home", "Gallery");
+                        return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
+                            new { controller = "Gallery", action = "Home", id = user.UserURL }));
                     }
                     else
                     {

@@ -1,0 +1,34 @@
+﻿@model Web_gellary.Models.ViewModel
+
+@{
+    ViewBag.Title = "Query";
+    Layout = "~/Views/_Layout.cshtml";
+    <link href="~/Styles/query-image-user.css" rel="stylesheet" type="text/css" />
+}
+
+@section head {
+    <script src="~/Scripts/query-image.js"></script>
+    <script src="~/Scripts/count-query.js"></script>
+}
+
+<h4>Query User</h4>
+<hr />
+<div class="block-user-query">
+    <div class="gallery">
+
+    </div>
+</div>
+
+<div class="block-view-image">
+    <div id="view-image">
+        <div id="block-view-image">
+            <div id="prev-image">&lt;</div>
+            <img id="display-image" class="display-image-to-width" src="" alt="Not image" />
+            <div id="next-image">&gt;</div>
+        </div>
+        <div id="footer-image">
+            <span id="accept"><i class="fa fa-check-circle"></i>Accept</span>
+            <span id="block"><i class="fa fa-ban"></i>Block</span>
+        </div>
+    </div>
+</div>
