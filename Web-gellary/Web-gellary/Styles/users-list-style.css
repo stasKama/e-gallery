@@ -1,0 +1,10 @@
+﻿.list-users {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.user {
+    text-align: left;
+}

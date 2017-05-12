@@ -1,5 +1,9 @@
 ﻿.user-information {
     margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
 }
 
 .user-gallery {
@@ -14,24 +18,21 @@
     margin: 7px 7px 7px 0
 }
 
-.user-information>div>a {
+.information {
+    width: 40%;
+    height: 220px;
+}
+
+.information>a {
     text-decoration: none;
     color: #44678f;
     font-family: Arial;
     font-size: 15px;
 }
 
-.user-information>div>a:hover {
+.information>a:hover {
     text-decoration: underline;
 }
-
-.user-information>div {
-    display: inline-block;
-    width: 40%;
-    height: 220px;
-}
-
-
 
 .image-to-width {
     width: 250px;

@@ -16,12 +16,21 @@
         var reader = new FileReader();
         reader.onload = function (event) {
             var fileData = event.target.result;
-            $(previewId).attr("src", fileData);
-            var tmpImg = new Image();
-            tmpImg.src = fileData;
-            orgWidth = tmpImg.width;
-            orgHeight = tmpImg.height;
-            $(previewId).addClass(orgWidth > orgHeight ? "vertical-image" : "horizontal-image");
+            var theImage = new Image();
+            var imageWidth;
+            var imageHeight;
+            theImage.src = fileData;
+            theImage.onload = function () {
+                $(previewId).removeClass();
+                $(previewId).attr("src", theImage.src);
+                imageWidth = theImage.width;
+                imageHeight = theImage.height;
+                console.log("ширина " + imageWidth + " высота " + imageHeight);
+                var classImage = imageWidth < 450 && imageHeight < 330 ? "" : imageWidth == imageHeight ? "horizontal-image" :
+                 imageWidth > imageHeight ? "vertical-image" : "horizontal-image";
+                $(previewId).addClass(classImage);
+            };
+                       
             fileInfo.data = fileData;
             fileInfo.name = file.name;
             $(messageId).text("");

@@ -3,23 +3,25 @@
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/_Layout.cshtml";
-    <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/view-image.css" rel="stylesheet" type="text/css" />
 }
 
 @section head {
     <script src="~/Scripts/gallery-user.js"></script>
+    <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/view-image.css" rel="stylesheet" type="text/css" />
 }
 
 <div class="user-information">
-    <div>
-        <img class="avatar-user" src="@Model.User.Avatar" />
-        @Model.User.Nick
-    </div>
-    @if (Model.User.UserURL == User.Identity.Name)
-    {
+    <div class="information">
         <div>
-            <a href="" class="">Editing profile</a>
+            <img class="avatar-user" src="@Model.User.Avatar" />
+            @Model.User.Nick
+        </div>
+    </div>
+    @if (User.Identity.IsAuthenticated && Model.User.UserURL == User.Identity.Name)
+    {
+        <div class="information">
+            <a href="/Edit/Edit" class="">Editing profile</a>
             <a href="/Image/UploadImage" class="">Upload image</a>
         </div>
     }
