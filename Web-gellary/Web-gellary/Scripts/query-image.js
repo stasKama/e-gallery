@@ -8,12 +8,7 @@
         arrayImages = data;
         maxIndex = arrayImages.length;
         for (var i = 0; i < maxIndex; i++) {
-            var img = new Image();
-            img.src = arrayImages[i];
-            imgWigth = img.width;
-            imgHeigth = img.height;
-            var classImage = imgWigth > imgHeigth ? "image-to-width" : "image-to-heigth";
-            var image = '<img class="' + classImage + ' block-image" src="' + arrayImages[i] + '" alt="Can not display"/>'
+            var image = '<div class="block-image"><img src="' + arrayImages[i] + '" alt="Can not display"/></div>'
             $(".gallery").append(image);
         }
     });

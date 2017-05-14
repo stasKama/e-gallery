@@ -13,11 +13,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="ImageId" Type="int" Nullable="false" />
     <Property Name="Comment" Type="varchar" MaxLength="300" Nullable="false" />
-    <Property Name="DateComment" Type="datetime" />
+    <Property Name="DateComment" Type="date" />
   </EntityType>
   <EntityType Name="Images">
     <Key>
@@ -35,7 +35,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="ImageId" Type="int" Nullable="false" />
   </EntityType>
@@ -93,7 +93,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__Image__17F790F9">
+  <Association Name="FK__CommentsT__Image__2A164134">
     <End Role="Images" Type="Self.Images" Multiplicity="1" />
     <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -105,7 +105,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__UserI__4E88ABD4">
+  <Association Name="FK__CommentsT__UserI__2B0A656D">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -129,7 +129,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__Image__18EBB532">
+  <Association Name="FK__LikesToIm__Image__2EDAF651">
     <End Role="Images" Type="Self.Images" Multiplicity="1" />
     <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -141,7 +141,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__UserI__4F7CD00D">
+  <Association Name="FK__LikesToIm__UserI__2FCF1A8A">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -193,11 +193,11 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Answers" EntitySet="Answers" />
     </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__Image__17F790F9" Association="Self.FK__CommentsT__Image__17F790F9">
+    <AssociationSet Name="FK__CommentsT__Image__2A164134" Association="Self.FK__CommentsT__Image__2A164134">
       <End Role="Images" EntitySet="Images" />
       <End Role="CommentsToImages" EntitySet="CommentsToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__UserI__4E88ABD4" Association="Self.FK__CommentsT__UserI__4E88ABD4">
+    <AssociationSet Name="FK__CommentsT__UserI__2B0A656D" Association="Self.FK__CommentsT__UserI__2B0A656D">
       <End Role="Users" EntitySet="Users" />
       <End Role="CommentsToImages" EntitySet="CommentsToImages" />
     </AssociationSet>
@@ -205,11 +205,11 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Images" EntitySet="Images" />
     </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__Image__18EBB532" Association="Self.FK__LikesToIm__Image__18EBB532">
+    <AssociationSet Name="FK__LikesToIm__Image__2EDAF651" Association="Self.FK__LikesToIm__Image__2EDAF651">
       <End Role="Images" EntitySet="Images" />
       <End Role="LikesToImages" EntitySet="LikesToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__UserI__4F7CD00D" Association="Self.FK__LikesToIm__UserI__4F7CD00D">
+    <AssociationSet Name="FK__LikesToIm__UserI__2FCF1A8A" Association="Self.FK__LikesToIm__UserI__2FCF1A8A">
       <End Role="Users" EntitySet="Users" />
       <End Role="LikesToImages" EntitySet="LikesToImages" />
     </AssociationSet>

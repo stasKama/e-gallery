@@ -23,7 +23,7 @@ namespace Web_gellary.Models
             this.DateUpload = DateTime.Now;
             this.CountView = 0;
         }
-    
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Expansion { get; set; }
@@ -41,9 +41,9 @@ namespace Web_gellary.Models
         public virtual ICollection<LikesToImages> LikesToImages { get; set; }
     }
 
-    public enum Status 
+    public enum Status
     {
-        VIEW  = 1,
+        VIEW = 1,
         BLOCK = 2,
         WAITING = 3
     }

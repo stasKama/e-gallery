@@ -196,6 +196,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EGellaryModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageInformation.cs" />
     <Compile Include="Models\Images.cs">
       <DependentUpon>EGellaryModel.tt</DependentUpon>
     </Compile>

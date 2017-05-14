@@ -10,6 +10,64 @@
     <link href="~/Styles/history-view-image.css" rel="stylesheet" type="text/css" />
 }
 
+<h4>Collection all users images</h4>
+<hr/>
 <div class="block-history">
 
+</div>
+
+<div class="panel-view-img">
+    <div class="block-view-image">
+        <div class="header-block">
+            <div class="block-view">
+                <div class="prev-image">&lt;</div>
+                <div class="image">
+                    <img id="select-image" />
+                </div>
+                <div class="next-image">&gt;</div>
+            </div>
+            <div class="footer-block">
+                <span>Image:<span class="digits"></span>of<span class="count-images"></span></span>
+            </div>
+        </div>
+        <div class="information-image">
+            <div class="information-athor">
+                <a class="img-author" href="">
+                    <img />
+                </a>
+                <div>
+                    <div class="name-author"><a href=""><span></span></a></div>
+                    <div class="data"></div>
+                </div>
+            </div>
+            <div class="view-and-like">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="like"><i class="fa fa-heart"></i><span></span></span>
+                }
+                <span class="view"><i class="fa fa-eye"></i><span></span></span>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="comments">
+
+                </div>
+                <div class="field-for-comment">
+                    <textarea class="your-comment" placeholder="Enter your comment..."></textarea>
+                </div>
+            }
+            else
+            {
+                <div class="message-user">
+                    <div class="img-lock">
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div>
+                        To view comments you must be an authorized user.
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
 </div>

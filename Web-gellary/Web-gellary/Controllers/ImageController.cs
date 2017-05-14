@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Web_gellary.Models;
 
 namespace Web_gellary.Controllers
@@ -60,6 +62,14 @@ namespace Web_gellary.Controllers
         {
             var serverPath = Server.MapPath("~");
             return Path.Combine(serverPath, "Images", directory, fileName);
+        }
+
+        [HttpPost]
+        public JsonResult GetCountImages()
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            var countImages = db.Images.Where(img => img.Status == (int)Status.VIEW).Count();
+            return Json(countImages, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -159,6 +169,87 @@ namespace Web_gellary.Controllers
                 User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult GetInformationImage(string UrlImage)
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
+            var Author = db.Users.Find(Image.UserId);
+            Image.CountView++;
+            db.SaveChanges();
+            var informationImage = new ImageInformation()
+            {
+                CountLike = db.LikesToImages.Where(li => li.ImageId == Image.Id).Count(),
+                CountView = Image.CountView,
+                UploadData = Convert.ToString(Image.DateUpload),
+                AuthorName = Author.Nick,
+                UrlUser = Author.UserURL,
+                Avatar = Author.Avatar
+            };
+            return Json(informationImage, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetComments(string UrlImage)
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
+            List<Comment> Comments = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                Comments = new List<Comment>();
+                foreach (var comment in db.CommentsToImages.Where(ci => ci.ImageId == Image.Id))
+                {
+                    var user = db.Users.Find(comment.UserId);
+                    Comments.Add(new Comment()
+                    {
+                        TextComment = comment.Comment,
+                        DataComment = Convert.ToString(comment.DateComment),
+                        UrlUser = user.UserURL,
+                        Avatar = user.Avatar,
+                        AuthorName = user.Nick
+                    });
+                }
+            }
+            return Json(Comments, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SetComment(string UrlImage, string Comment)
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
+            var UserId = Int32.Parse(User.Identity.Name);
+            var CommentImage = new CommentsToImages()
+            {
+                Comment = Comment,
+                UserId = UserId,
+                ImageId = Image.Id
+            };
+            db.CommentsToImages.Add(CommentImage);
+            db.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult PutImageLikes(string UrlImage)
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
+            var UserId = Int32.Parse(User.Identity.Name);
+            var UserLike = db.LikesToImages.FirstOrDefault(li => li.ImageId == Image.Id && li.UserId == UserId);
+            if (UserLike == null)
+            {
+                db.LikesToImages.Add(new LikesToImages() { UserId = UserId, ImageId = Image.Id });
+            }
+            else
+            {
+                db.LikesToImages.Remove(UserLike);
+            }
+            db.SaveChanges();
+            return Json(db.Images.FirstOrDefault(img => img.Id == Image.Id).LikesToImages.Count, JsonRequestBehavior.AllowGet);
         }
     }
 }
