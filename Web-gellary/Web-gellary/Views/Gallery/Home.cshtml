@@ -8,7 +8,7 @@
 @section head {
     <script src="~/Scripts/gallery-user.js"></script>
     <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/view-image.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/gallery.css" rel="stylesheet" type="text/css" />
 }
 
 <div class="user-information">
@@ -27,10 +27,62 @@
     }
     <hr/>
 </div>
-<div class="user-gallery">
+<div class="block-gallery">
     
 </div>
 
-<div class="block-view-image">
-    <img id="view-image" src="" alt="Not image" />
+<div class="panel-view-img">
+    <div class="block-view-image">
+        <div class="header-block">
+            <div class="block-view">
+                <div class="prev-image">&lt;</div>
+                <div class="image">
+                    <img id="select-image" />
+                </div>
+                <div class="next-image">&gt;</div>
+            </div>
+            <div class="footer-block">
+                <span>Image:<span class="digits"></span>of<span class="count-images"></span></span>
+            </div>
+        </div>
+        <div class="information-image">
+            <div class="information-athor">
+                <a class="img-author" href="">
+                    <img />
+                </a>
+                <div>
+                    <div class="name-author"><a href=""><span></span></a></div>
+                    <div class="data"></div>
+                </div>
+            </div>
+            <div class="view-and-like">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="like"><i class="fa fa-heart"></i><span></span></span>
+                }
+                <span class="view"><i class="fa fa-eye"></i><span></span></span>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="comments">
+
+                </div>
+                <div class="field-for-comment">
+                    <textarea class="your-comment" placeholder="Enter your comment..."></textarea>
+                </div>
+            }
+            else
+            {
+                <div class="message-user">
+                    <div class="img-lock">
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div>
+                        To view comments you must be an authorized user.
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
 </div>

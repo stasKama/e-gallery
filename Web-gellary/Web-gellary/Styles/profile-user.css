@@ -33,20 +33,3 @@
 .information>a:hover {
     text-decoration: underline;
 }
-
-img {
-    max-height: 100%;
-    max-width: 240px;
-    display: block;
-    margin: 0 auto;
-}
-
-.block-image {
-    display: inline-block;
-    width: 260px; 
-    height: 200px;
-    margin: 0 15px 15px 0; 
-    padding: 10px 0; 
-    border: 1px solid #44678f;
-    cursor: pointer;
-}

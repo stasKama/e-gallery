@@ -14,7 +14,7 @@
             if (viewImages.length > 0) {
                 for (var i = 0; i < viewImages.length; i++) {
                     var image = '<div class="block-image"><img src="' + viewImages[i] + '" alt="Can not display"/></div>'
-                    $(".block-history").append(image);
+                    $(".block-gallery").append(image);
                 }
             }
         });
@@ -55,19 +55,21 @@
             },
             traditional: true,
             dataType: "json",
-            success: function(data) {
-                var info = data;
-                $(".comments").html("");
-                for (var i = 0; i < info.length; i++) {
-                    var linkUser = "/Gallery/Home/" + info[i].UrlUser;
-                    var comment = '<div class="comment">' +
-                        '<div class="left"><a href="' + linkUser + '">' +
-                        '<img src="' + info[i].Avatar + '"/></a></div>' +
-                        '<div class="right"><div><a href="' + linkUser + '">' + info[i].AuthorName + '</a>' +
-                         '<div class="message">' + info[i].TextComment + '</div></div>' +
-                        '<div><span>' + info[i].DataComment.substring(0, 10) + '</span></div>' +
-                        '</div></div>';
-                    $(".comments").append(comment);
+            success: function (data) {
+                if (data != null) {
+                    var info = data;
+                    $(".comments").html("");
+                    for (var i = 0; i < info.length; i++) {
+                        var linkUser = "/Gallery/Home/" + info[i].UrlUser;
+                        var comment = '<div class="comment">' +
+                            '<div class="left"><a href="' + linkUser + '">' +
+                            '<img src="' + info[i].Avatar + '"/></a></div>' +
+                            '<div class="right"><div><a href="' + linkUser + '">' + info[i].AuthorName + '</a>' +
+                             '<div class="message">' + info[i].TextComment + '</div></div>' +
+                            '<div><span>' + info[i].DataComment.substring(0, 10) + '</span></div>' +
+                            '</div></div>';
+                        $(".comments").append(comment);
+                    }
                 }
             },
             error: errorFunc
@@ -86,7 +88,7 @@
         }
     });
 
-    $(".block-history").on("click", "img", function () {
+    $(".block-gallery").on("click", "img", function () {
         $(".panel-view-img").addClass("display-block");
         $("html").addClass("hide-scroll");
         $("a.scrollup").hide();

@@ -152,6 +152,8 @@
     <Content Include="Scripts\query-image.js" />
     <Content Include="Scripts\scrollup.js" />
     <Content Include="Scripts\upload-image.js" />
+    <Content Include="Scripts\users-view.js" />
+    <Content Include="Styles\gallery.css" />
     <Content Include="Styles\history-view-image.css" />
     <Content Include="Styles\layout.css" />
     <Content Include="Styles\login.css" />
@@ -160,7 +162,6 @@
     <Content Include="Styles\query-image-user.css" />
     <Content Include="Styles\upload-image-form.css" />
     <Content Include="Styles\users-list-style.css" />
-    <Content Include="Styles\view-image.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +209,7 @@
     <Compile Include="Models\Users.cs">
       <DependentUpon>EGellaryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Verification.cs">
       <DependentUpon>EGellaryModel.tt</DependentUpon>
     </Compile>

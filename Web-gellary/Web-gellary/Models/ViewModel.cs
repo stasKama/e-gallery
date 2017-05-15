@@ -8,7 +8,6 @@ namespace Web_gellary.Models
     public class ViewModel
     {
         public Users User { get; set; }
-        public IEnumerable<Users> UsersList { get; set; }
         public IEnumerable<Images> ImagesList { get; set; }
     }
 }

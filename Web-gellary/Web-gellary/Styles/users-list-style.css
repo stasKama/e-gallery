@@ -1,10 +1,73 @@
-﻿.list-users {
+﻿#content  {
     display: flex;
+}
+
+.list-users {
+    display: flex;
+    width: 500px;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
 }
 
 .user {
+    margin-left: 30px;
+    margin-top: 5px;
     text-align: left;
+    height: 100px;
+    width: 450px;
+    border-bottom: 0.5px solid #8d8d8d;
+}
+
+.avatar-user {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    float: left; 
+    margin: 10px;
+}
+
+.information>div {
+    padding: 7px;
+}
+
+.information a {
+    text-decoration: none;
+    color: #44678f;
+    font-family: Arial;
+    font-size: 16px;
+}
+
+.information a:hover {
+    text-decoration: underline;
+}
+
+.status {
+    color: #8d8d8d;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.filter {
+    height: 200px;
+    width: 300px;
+    padding-top: 10px;
+}
+
+.upload-info {
+    font-family: Arial;
+    font-size: 13px;
+    padding-bottom: 3px;
+}
+
+.status>i {
+    padding-left: 4px;
+}
+
+.online {
+    color: #009d00;
+}
+
+.no-online {
+    color: #8d8d8d;
 }

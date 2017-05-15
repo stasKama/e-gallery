@@ -6,20 +6,23 @@
 }
 
 @section head {
+    <script src="~/Scripts/users-view.js"></script>
     <link href="~/Styles/users-list-style.css" rel="stylesheet" type="text/css" />
 }
 
 <div class="list-users">
-    @foreach (var item in Model.UsersList)
-    {
-        <div class="user">
-            <a href="/Gallery/Home/@item.UserURL">
-                @Html.DisplayFor(modelItem => item.Nick)
-                <img src="@item.Avatar" style="width:50px; height:50px;" />
-            </a>
-            @Html.DisplayFor(modelItem => item.State)
-            @Html.DisplayFor(modelItem => item.Permission)
-            0
-        </div>
-    }
+    
+</div>
+<div class="filter">
+    <div>
+        <input type="text"/> Nick
+    </div>
+    <div>
+        <input type="checkbox" /> online
+        <input type="checkbox" /> no-online
+    </div>
+    <div>
+        <input type="checkbox" /> With avatar
+        <input type="checkbox" /> No with avatar
+    </div>
 </div>

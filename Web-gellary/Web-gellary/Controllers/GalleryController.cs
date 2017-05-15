@@ -44,10 +44,28 @@ namespace Web_gellary.Controllers
             EGellaryEntities db = new EGellaryEntities();
             ViewModel model = new ViewModel()
             {
-                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name),
-                UsersList = db.Users.ToList()
+                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult GetUsers()
+        {
+            EGellaryEntities db = new EGellaryEntities();
+            List<UserViewModel> UsersModel = new List<UserViewModel>();
+            foreach(var user in db.Users.ToList())
+            {
+                UsersModel.Add(new UserViewModel()
+                {
+                    Url = user.UserURL,
+                    Avatar = user.Avatar,
+                    Nick = user.Nick,
+                    Status = user.State,
+                    CountUploadImages = user.Images.Where(im => im.Status == (int)Status.VIEW).Count()
+                });
+            } 
+            return Json(UsersModel, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult History()
