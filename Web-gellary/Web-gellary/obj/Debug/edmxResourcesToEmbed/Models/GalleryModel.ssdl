@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище GalleryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Answers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="PictureId" Type="int" Nullable="false" />
+    <Property Name="Text" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="CommentsToImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ImageId" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="DateComment" Type="date" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="9" StoreGeneratedPattern="Computed" />
+    <Property Name="Expansion" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="DateUpload" Type="date" />
+    <Property Name="CountView" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LikesToImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ImageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PicturesWaiting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="9" StoreGeneratedPattern="Computed" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DateUpload" Type="date" />
+    <Property Name="Expansion" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserURL" Type="varchar" MaxLength="9" StoreGeneratedPattern="Computed" />
+    <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Nick" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Avatar" Type="varchar" MaxLength="255" />
+    <Property Name="State" Type="varchar" MaxLength="20" />
+    <Property Name="Permission" Type="int" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Verification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="VerificationCode" Type="varchar" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Answers__Picture__531856C7">
+    <End Role="PicturesWaiting" Type="Self.PicturesWaiting" Multiplicity="1" />
+    <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PicturesWaiting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="PictureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Answers__UserId__540C7B00">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommentsT__Image__2A164134">
+    <End Role="Images" Type="Self.Images" Multiplicity="1" />
+    <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CommentsToImages">
+        <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommentsT__UserI__2B0A656D">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CommentsToImages">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Images__UserId__1AD3FDA4">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LikesToIm__Image__2EDAF651">
+    <End Role="Images" Type="Self.Images" Multiplicity="1" />
+    <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LikesToImages">
+        <PropertyRef Name="ImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LikesToIm__UserI__2FCF1A8A">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LikesToImages">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PicturesW__UserI__503BEA1C">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PicturesWaiting" Type="Self.PicturesWaiting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PicturesWaiting">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Verificat__UserI__5070F446">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Verification" Type="Self.Verification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Verification">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище GalleryModelContainer">
+    <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommentsToImages" EntityType="Self.CommentsToImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LikesToImages" EntityType="Self.LikesToImages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PicturesWaiting" EntityType="Self.PicturesWaiting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Verification" EntityType="Self.Verification" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Answers__Picture__531856C7" Association="Self.FK__Answers__Picture__531856C7">
+      <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Answers__UserId__540C7B00" Association="Self.FK__Answers__UserId__540C7B00">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentsT__Image__2A164134" Association="Self.FK__CommentsT__Image__2A164134">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="CommentsToImages" EntitySet="CommentsToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentsT__UserI__2B0A656D" Association="Self.FK__CommentsT__UserI__2B0A656D">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CommentsToImages" EntitySet="CommentsToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__UserId__1AD3FDA4" Association="Self.FK__Images__UserId__1AD3FDA4">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LikesToIm__Image__2EDAF651" Association="Self.FK__LikesToIm__Image__2EDAF651">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="LikesToImages" EntitySet="LikesToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LikesToIm__UserI__2FCF1A8A" Association="Self.FK__LikesToIm__UserI__2FCF1A8A">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LikesToImages" EntitySet="LikesToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PicturesW__UserI__503BEA1C" Association="Self.FK__PicturesW__UserI__503BEA1C">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Verificat__UserI__5070F446" Association="Self.FK__Verificat__UserI__5070F446">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Verification" EntitySet="Verification" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

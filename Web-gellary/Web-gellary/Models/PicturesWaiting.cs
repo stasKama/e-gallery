@@ -32,11 +32,11 @@ namespace Web_gellary.Models
         public virtual ICollection<Answers> Answers { get; set; }
         public virtual Users Users { get; set; }
     }
+
     public enum Status
     {
         WAITING = 1,
         VIEW = 2,
         BLOCK = 3
     }
-
 }

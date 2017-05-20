@@ -269,5 +269,36 @@ namespace Web_gellary.Controllers
             db.SaveChanges();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
+
+        [Authorize(Roles = "User")]
+        public ActionResult Answers()
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            ViewModel model = new ViewModel()
+            {
+                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult GetAnswers()
+        {
+            List<AnswersModel> answers = new List<AnswersModel>();
+            EGalleryEntities db = new EGalleryEntities();
+            var UserId = Int32.Parse(User.Identity.Name);
+            foreach (var answer in db.Answers.Where(ans => ans.UserId == UserId))
+            {
+                var directory = answer.PicturesWaiting.Status == (int)Status.VIEW ? "view" : "block";
+                var url = Url.Content("~/Images/" + directory + "/" + answer.PicturesWaiting.Name + "." + answer.PicturesWaiting.Expansion);
+                answers.Add(new AnswersModel() {
+                    DateAnswer =  Convert.ToString(answer.Date),
+                    Text = answer.Text,
+                    UrlImage = url
+                });
+            }
+            answers.Reverse();
+            return Json(answers, JsonRequestBehavior.AllowGet);
+        }
     }
 }

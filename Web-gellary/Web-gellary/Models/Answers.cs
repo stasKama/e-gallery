@@ -14,12 +14,17 @@ namespace Web_gellary.Models
     
     public partial class Answers
     {
+        public Answers()
+        {
+            this.Date = DateTime.Now;
+        }
         public int Id { get; set; }
         public int UserId { get; set; }
         public int PictureId { get; set; }
         public string Text { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
-        public virtual Users Users { get; set; }
         public virtual PicturesWaiting PicturesWaiting { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

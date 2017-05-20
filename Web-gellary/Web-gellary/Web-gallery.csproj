@@ -129,21 +129,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Gellary.mdf" />
-    <Content Include="App_Data\Gellary_log.ldf">
-      <DependentUpon>Gellary.mdf</DependentUpon>
+    <Content Include="App_Data\Gallery.mdf" />
+    <Content Include="App_Data\Gallery_log.ldf">
+      <DependentUpon>Gallery.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Models\EGalleryModelSate.Context.tt">
+    <Content Include="Models\GalleryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EGalleryModelSate.edmx</DependentUpon>
-      <LastGenOutput>EGalleryModelSate.Context.cs</LastGenOutput>
+      <DependentUpon>GalleryModel.edmx</DependentUpon>
+      <LastGenOutput>GalleryModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EGalleryModelSate.tt">
+    <Content Include="Models\GalleryModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EGalleryModelSate.edmx</DependentUpon>
-      <LastGenOutput>EGalleryModelSate.cs</LastGenOutput>
+      <DependentUpon>GalleryModel.edmx</DependentUpon>
+      <LastGenOutput>GalleryModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\answers.js" />
     <Content Include="Scripts\count-answers.js" />
     <Content Include="Scripts\count-query.js" />
     <Content Include="Scripts\gallery-user.js" />
@@ -153,6 +154,7 @@
     <Content Include="Scripts\scrollup.js" />
     <Content Include="Scripts\upload-image.js" />
     <Content Include="Scripts\users-view.js" />
+    <Content Include="Styles\answers-image-user.css" />
     <Content Include="Styles\gallery.css" />
     <Content Include="Styles\history-view-image.css" />
     <Content Include="Styles\layout.css" />
@@ -176,46 +178,47 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\Answers.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnswersModel.cs" />
     <Compile Include="Models\CommentsToImages.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EditUserModel.cs" />
-    <Compile Include="Models\EGalleryModelSate.Context.cs">
+    <Compile Include="Models\GalleryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EGalleryModelSate.Context.tt</DependentUpon>
+      <DependentUpon>GalleryModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EGalleryModelSate.cs">
+    <Compile Include="Models\GalleryModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EGalleryModelSate.Designer.cs">
+    <Compile Include="Models\GalleryModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EGalleryModelSate.edmx</DependentUpon>
+      <DependentUpon>GalleryModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ImageInformation.cs" />
     <Compile Include="Models\Images.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImageSave.cs" />
     <Compile Include="Models\LikesToImages.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PicturesWaiting.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiteRole.cs" />
     <Compile Include="Models\Users.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Verification.cs">
-      <DependentUpon>EGalleryModelSate.tt</DependentUpon>
+      <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,12 +238,13 @@
     <Content Include="Views\Gallery\Users.cshtml" />
     <Content Include="Views\Edit\Edit.cshtml" />
     <Content Include="Views\Gallery\History.cshtml" />
-    <EntityDeploy Include="Models\EGalleryModelSate.edmx">
+    <Content Include="Views\Image\Answers.cshtml" />
+    <EntityDeploy Include="Models\GalleryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EGalleryModelSate.Designer.cs</LastGenOutput>
+      <LastGenOutput>GalleryModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EGalleryModelSate.edmx.diagram">
-      <DependentUpon>EGalleryModelSate.edmx</DependentUpon>
+    <Content Include="Models\GalleryModel.edmx.diagram">
+      <DependentUpon>GalleryModel.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
