@@ -108,6 +108,5 @@ C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\bin\ru\System.Web.
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\bin\ru\System.Web.Webpages.Razor.resources.dll
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\bin\ru\System.Web.Helpers.resources.dll
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\bin\ru\System.Web.Mvc.resources.dll
-C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\obj\Debug\Web-gellary.csprojResolveAssemblyReference.cache
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\obj\Debug\Web-gellary.dll
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\Web-gellary\obj\Debug\Web-gellary.pdb

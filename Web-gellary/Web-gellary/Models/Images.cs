@@ -17,34 +17,23 @@ namespace Web_gellary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Images()
         {
-            this.Answers = new HashSet<Answers>();
             this.CommentsToImages = new HashSet<CommentsToImages>();
             this.LikesToImages = new HashSet<LikesToImages>();
             this.DateUpload = DateTime.Now;
             this.CountView = 0;
         }
-
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Expansion { get; set; }
         public Nullable<System.DateTime> DateUpload { get; set; }
         public int CountView { get; set; }
         public int UserId { get; set; }
-        public int Status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answers> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommentsToImages> CommentsToImages { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LikesToImages> LikesToImages { get; set; }
-    }
-
-    public enum Status
-    {
-        VIEW = 1,
-        BLOCK = 2,
-        WAITING = 3
     }
 }

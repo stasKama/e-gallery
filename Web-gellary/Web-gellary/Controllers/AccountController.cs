@@ -30,7 +30,7 @@ namespace Web_gellary.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (EGellaryEntities db = new EGellaryEntities())
+                using (EGalleryEntities db = new EGalleryEntities())
                 {
                     Users user = db.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
                     if (user != null)
@@ -71,7 +71,7 @@ namespace Web_gellary.Controllers
             if (ModelState.IsValid)
             {
                 Users user = null;
-                using (EGellaryEntities db = new EGellaryEntities())
+                using (EGalleryEntities db = new EGalleryEntities())
                 {
                     user = db.Users.FirstOrDefault(u => u.Email == account.Email);
                     if (user == null)
@@ -97,9 +97,9 @@ namespace Web_gellary.Controllers
         [Authorize]
         public ActionResult Logout()
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
-            user.State = "no-online";
+            user.State = "offline";
             db.SaveChanges();
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");

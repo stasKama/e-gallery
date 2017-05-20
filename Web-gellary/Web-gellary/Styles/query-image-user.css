@@ -1,23 +1,22 @@
-﻿.block-user-query {
-    margin: 10px;
+﻿.block-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
-.gallery {
-    
-}
-
-img {
+.block-image>img {
     max-height: 100%;
     max-width: 240px;
     display: block;
-    margin: 0 auto;
 }
 
 .block-image {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 260px; 
     height: 200px;
-    margin: 0 15px 15px 0; 
+    margin: 15px 5px; 
     padding: 10px 0; 
     border: 1px solid #44678f;
     cursor: pointer;

@@ -10,11 +10,11 @@
     <script src="~/Scripts/scrollup.js"></script>
     @if (User.Identity.IsAuthenticated)
     {
-        if (Model.User.Role == "Moderator")
+        if (User.IsInRole("Moderator"))
         {
             <script src="~/Scripts/count-query.js"></script>
         }
-        if (Model.User.Role == "User")
+        if (User.IsInRole("User"))
         {
             <script src="~/Scripts/count-answers.js"></script>
         }
@@ -33,7 +33,7 @@
                     <li><a href="/Gallery/Home/@User.Identity.Name"><i class="fa fa-user"></i>Profile</a></li>
                     <li><a href="/Gallery/Users"><i class="fa fa-users"></i>Users</a></li>
                     <li><a href="/Gallery/History"><i class="fa fa-history"></i>History</a></li>
-                    if (Model.User.Role == "User")
+                    if (User.IsInRole("User"))
                     {
                         <li><a href=""><i class="fa fa-bell-o"></i>Answers <span id="count-answer"></span></a></li>
                     }

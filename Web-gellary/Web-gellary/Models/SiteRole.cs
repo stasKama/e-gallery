@@ -48,7 +48,7 @@ namespace Web_gellary.Models
 
         public override string[] GetRolesForUser(string username)
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             string role = db.Users.FirstOrDefault(x => x.UserURL == username).Role;
             string[] result = { role };
             return result;

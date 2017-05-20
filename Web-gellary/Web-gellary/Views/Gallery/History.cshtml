@@ -28,7 +28,11 @@
                 <div class="next-image">&gt;</div>
             </div>
             <div class="footer-block">
-                <span>Image:<span class="digits"></span>of<span class="count-images"></span></span>
+                <span class="info">Image:<span class="digits"></span>of<span class="count-images"></span></span>
+                @if (User.IsInRole("Moderator"))
+                {
+                <span class="delete"><i class="fa fa-trash-o"></i>Delete</span>
+                }
             </div>
         </div>
         <div class="information-image">

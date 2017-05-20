@@ -6,18 +6,20 @@
 
     $.post("/Image/GetQueryImages", function (data) {
         arrayImages = data;
-        maxIndex = arrayImages.length;
-        for (var i = 0; i < maxIndex; i++) {
-            var image = '<div class="block-image"><img src="' + arrayImages[i] + '" alt="Can not display"/></div>'
-            $(".gallery").append(image);
+        if (arrayImages.length > 0) {
+            for (var i = 0; i < arrayImages.length; i++) {
+                var image = '<div class="block-image"><img src="' + arrayImages[i] + '" alt="Can not display"/></div>'
+                $(".block-gallery").append(image);
+            }
         }
+        $(".count-images").text(arrayImages.length);
     });
 
     function errorFunc(errorData) {
         alert("Error upload page");
     }
 
-    $(".gallery").on("click", "img", function () {
+    $(".block-gallery").on("click", "img", function () {
         $(".block-view-image").addClass("display-block");
         srcImage = $(this).attr("src");
         indexImage = arrayImages.indexOf(srcImage);
@@ -36,11 +38,15 @@
         $(".block-view-image").removeClass("display-block");
     });
 
+    function getImage() {
+        return $('.block-gallery .block-image img[src="' + srcImage + '"]');
+    }
+
     $("#block").click(function () {
         var name = srcImage.substring(srcImage.lastIndexOf("/") + 1, srcImage.lastIndexOf("."));
         $.ajax({
-            url: "/Image/Block",
             type: "POST",
+            url: "/Image/Block",
             data: {
                 UrlImage: name
             },
@@ -67,7 +73,7 @@
     });
 
     function resultFunction(data) {
-        $(getImage()).remove();
+        $(getImage()).parent().remove();
         arrayImages = arrayImages.filter(function (x) {
             return x != srcImage;
         });
@@ -81,10 +87,6 @@
             }
         }
         $("#count-query").text(arrayImages.length == 0 ? "" : arrayImages.length);
-    }
-
-    function getImage() {
-        return $('.gallery img[src="' + srcImage + '"]');
     }
 
     $("#prev-image").click(function () {

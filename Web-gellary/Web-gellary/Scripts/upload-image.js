@@ -43,12 +43,13 @@
         reader.readAsDataURL(file);
     });
 
-    $(submitId).click(function (e) {
+    $(submitId).click(function () {
+        ex = fileInfo.name.substring(1 + fileInfo.name.lastIndexOf("."));
         $.ajax({
             type: 'POST',
             url: "/Image/AddImageAjax",
             data: {
-                fileName: fileInfo.name,
+                expansion: ex,
                 fileData: fileInfo.data
             },
             success: function (data) {
@@ -61,14 +62,9 @@
                 $(fileLableId).addClass("no-choose-file");
                 $(submitId).addClass("no-active-submit");
                 $(messageId).text("The image was sent to the moderator");
-            },
-            error: function () {
-                alert('Error upload image');
             }
         });
-
-        e.preventDefault();
-
+        
     });
 
 });

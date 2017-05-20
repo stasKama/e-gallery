@@ -15,7 +15,7 @@ namespace Web_gellary.Controllers
         public ActionResult Home(string id)
         {
             UserId = id;
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             ViewModel model = new ViewModel()
             {
                 User = db.Users.FirstOrDefault(u => u.UserURL == id)
@@ -28,9 +28,9 @@ namespace Web_gellary.Controllers
         {
             var id = Int32.Parse(UserId);
             List<string> imagesUrl = new List<string>();
-            using (EGellaryEntities db = new EGellaryEntities())
+            using (EGalleryEntities db = new EGalleryEntities())
             {
-                foreach (var img in db.Images.Where(im => im.UserId == id && im.Status == (int)Status.VIEW))
+                foreach (var img in db.Images.Where(im => im.UserId == id))
                 {
                     imagesUrl.Add(Url.Content("~/Images/gallery/" + img.Name + "." + img.Expansion));
                 }
@@ -41,7 +41,7 @@ namespace Web_gellary.Controllers
 
         public ActionResult Users()
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             ViewModel model = new ViewModel()
             {
                 User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
@@ -52,7 +52,7 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult GetUsers()
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             List<UserViewModel> UsersModel = new List<UserViewModel>();
             foreach(var user in db.Users.ToList())
             {
@@ -62,7 +62,7 @@ namespace Web_gellary.Controllers
                     Avatar = user.Avatar,
                     Nick = user.Nick,
                     Status = user.State,
-                    CountUploadImages = user.Images.Where(im => im.Status == (int)Status.VIEW).Count()
+                    CountUploadImages = user.Images.Count()
                 });
             } 
             return Json(UsersModel, JsonRequestBehavior.AllowGet);
@@ -71,7 +71,7 @@ namespace Web_gellary.Controllers
         public ActionResult History()
         {
             CountSkip = 0;
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             ViewModel model = new ViewModel()
             {
                 User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name),
@@ -82,8 +82,8 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult GetHistory()
         {
-            EGellaryEntities db = new EGellaryEntities();
-            var image = db.Images.Where(im => im.Status == (int)Status.VIEW).ToList();
+            EGalleryEntities db = new EGalleryEntities();
+            var image = db.Images.ToList();
             image.Reverse();
             List<string> imagesUrl = new List<string>();
             foreach (var img in image.Skip(CountSkip).Take(12))
@@ -92,6 +92,22 @@ namespace Web_gellary.Controllers
             }
             CountSkip += 12;
             return Json(imagesUrl, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetCountAnswer()
+        {
+            var UserId = Int32.Parse(User.Identity.Name);
+            EGalleryEntities db = new EGalleryEntities();
+            return Json(db.Answers.Where(an => an.UserId == UserId).Count(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetCountQuery()
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            return Json(db.PicturesWaiting.Where(im => im.Status == (int)Status.WAITING).Count(),
+                JsonRequestBehavior.AllowGet);
         }
     }
 }

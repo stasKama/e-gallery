@@ -16,10 +16,10 @@ namespace Web_gellary.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int ImageId { get; set; }
+        public int PictureId { get; set; }
         public string Text { get; set; }
     
-        public virtual Images Images { get; set; }
         public virtual Users Users { get; set; }
+        public virtual PicturesWaiting PicturesWaiting { get; set; }
     }
 }

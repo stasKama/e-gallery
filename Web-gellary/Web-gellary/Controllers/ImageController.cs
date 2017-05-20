@@ -15,7 +15,7 @@ namespace Web_gellary.Controllers
         [Authorize]
         public ActionResult UploadImage()
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             ViewModel model = new ViewModel()
             {
                 User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
@@ -23,37 +23,42 @@ namespace Web_gellary.Controllers
             return View(model);
         }
 
-        public ActionResult AddImage(HttpPostedFileBase file)
+        public ActionResult AddImage()
         {
             return RedirectToAction("UploadImage");
         }
         
-        public JsonResult AddImageAjax(string fileName, string fileData)
+        [HttpPost]
+        public JsonResult AddImageAjax(string expansion, string fileData)
         {
-            EGellaryEntities db = new EGellaryEntities();
-            var serverPath = Server.MapPath("~");
-            var point = fileName.LastIndexOf(".");
-            var userId = Int32.Parse(User.Identity.Name);
-            Users user = db.Users.FirstOrDefault(u => u.Id == userId);
+            EGalleryEntities db = new EGalleryEntities();
+            Users user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
             var permission = user.Permission > 0;
             if (permission)
             {
-                Images image = new Images
+                if (User.IsInRole("Moderator"))
                 {
-                    Status = (int)(user.Role == "User" ? Status.WAITING : Status.VIEW),
-                    Expansion = fileName.Substring(point + 1).ToLower(),
-                    UserId = userId
-                };
-                db.Images.Add(image);
-                db.SaveChanges();
-                var path = GetPathToImg(image.Name + "." + image.Expansion, user.Role == "User" ? "expectation" : "gallery");
-                var dataIndex = fileData.IndexOf("base64", StringComparison.Ordinal) + 7;
-                var cleareData = fileData.Substring(dataIndex);
-                var fileInformation = Convert.FromBase64String(cleareData);
-                var bytes = fileInformation.ToArray();
-                var fileStream = System.IO.File.Create(path);
-                fileStream.Write(bytes, 0, bytes.Length);
-                fileStream.Close();
+                    Images image = new Images
+                    {
+                        Expansion = expansion.ToLower(),
+                        UserId = user.Id
+                    };
+                    db.Images.Add(image);
+                    db.SaveChanges();
+                    ImageSave.Save(fileData, GetPathToImg(image.Name + "." + image.Expansion, "gallery"));
+                }
+                else
+                {
+                    PicturesWaiting image = new PicturesWaiting
+                    {
+                        Expansion = expansion.ToLower(),
+                        UserId = user.Id,
+                        Status = (int) Status.WAITING
+                    };
+                    db.PicturesWaiting.Add(image);
+                    db.SaveChanges();
+                    ImageSave.Save(fileData, GetPathToImg(image.Name + "." + image.Expansion, "expectation"));
+                }
             }
             return Json(permission, JsonRequestBehavior.AllowGet);
         }
@@ -67,91 +72,77 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult GetCountImages()
         {
-            EGellaryEntities db = new EGellaryEntities();
-            var countImages = db.Images.Where(img => img.Status == (int)Status.VIEW).Count();
-            return Json(countImages, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult GetCountAnswer()
-        {
-            var UserId = Int32.Parse(User.Identity.Name);
-            EGellaryEntities db = new EGellaryEntities();
-            var countQuery = db.Answers.Where(an => an.UserId == UserId).Count();
-            return Json(countQuery, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult GetCountQuery()
-        {
-            EGellaryEntities db = new EGellaryEntities();
-            var countQuery = db.Images.Where(im => im.Status == (int) Status.WAITING).Count();
-            return Json(countQuery, JsonRequestBehavior.AllowGet);
+            EGalleryEntities db = new EGalleryEntities();
+            return Json(db.Images.Count(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult Accect(string UrlImage)
         {
-            var Image = ActImage(UrlImage, Status.VIEW);
-            AnswerUser("Accect", Image);
-            MoveFile(Image.Name + "." + Image.Expansion, "gallery");
+            EGalleryEntities db = new EGalleryEntities();
+            var Picture = GetPicture(UrlImage, Status.VIEW, "Accect");
+            var Image = new Images()
+            {
+                Expansion = Picture.Expansion,
+                DateUpload = Picture.DateUpload,
+                UserId = Picture.UserId
+            };
+            db.Images.Add(Image);
+            db.SaveChanges();
+            var url = Picture.Name + "." + Picture.Expansion;
+            System.IO.File.Copy(GetPathToImg(url, "expectation"), GetPathToImg(url, "view"));
+            MoveFile(url, Image.Name + "." + Image.Expansion, "expectation", "gallery");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult Block(string UrlImage)
         {
-            var Image = ActImage(UrlImage, Status.BLOCK);
-            AnswerUser("Block", Image);
-            MoveFile(Image.Name + "." + Image.Expansion, "block");
-            EGellaryEntities db = new EGellaryEntities();
-            var user = db.Users.Find(Image.UserId);
+            EGalleryEntities db = new EGalleryEntities();
+            var Picture = GetPicture(UrlImage, Status.BLOCK, "Block");
+            MoveFile(Picture.Name + "." + Picture.Expansion, Picture.Name + "." + Picture.Expansion, "expectation", "block");
+            var user = db.Users.Find(Picture.UserId);
             user.Permission--;
             db.SaveChanges();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        private void AnswerUser(string Message, Images Image)
+        private PicturesWaiting GetPicture(string UrlImage, Status status, string Message)
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
+            var Picture = db.PicturesWaiting.FirstOrDefault(im => im.Name == UrlImage);
+            Picture.Status = (int)status;
+            db.SaveChanges();
+            AnswerUser(Message, Picture.Id, Picture.UserId);
+            return Picture;
+        }
+
+        private void AnswerUser(string Message, int ImageId, int UserId)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            Users user = db.Users.Find(UserId);
             Answers answer = new Answers()
             {
-                UserId = Image.UserId,
-                ImageId = Image.Id,
-                Text = Image.Users.Nick + ", your image: " + Message + "."
+                UserId = user.Id,
+                PictureId = ImageId, 
+                Text = user.Nick + ", your image: " + Message + "."
             };
             db.Answers.Add(answer);
             db.SaveChanges();
         }
 
-        private void MoveFile(string NameImage, string directory)
+        private void MoveFile(string OldNameImage, string NewNameImage, string OldDirectory, string NewDirectory)
         {
-            System.IO.File.Move(GetPathToImg(NameImage, "expectation"), GetPathToImg(NameImage, directory));
-        }
-
-        private Images ActImage(string NameImage, Status status)
-        {
-            EGellaryEntities db = new EGellaryEntities();
-            var Image = db.Images.FirstOrDefault(im => im.Name == NameImage);
-            Image.Status = (int) status;
-            db.SaveChanges();
-            return Image;
-        }
-
-        private string GetNameImage(string UrlImage)
-        {
-            var PositionPoint = UrlImage.LastIndexOf(".");
-            var PositionSlash = UrlImage.LastIndexOf("/");
-            return UrlImage.Substring(PositionSlash + 1, PositionPoint);
+            System.IO.File.Move(GetPathToImg(OldNameImage, OldDirectory), GetPathToImg(NewNameImage, NewDirectory));
         }
 
         [HttpPost]
         public JsonResult GetQueryImages()
         {
             List<string> imagesUrl = new List<string>();
-            using (EGellaryEntities db = new EGellaryEntities())
+            using (EGalleryEntities db = new EGalleryEntities())
             {
-                foreach (var img in db.Images.Where(im => im.Status == (int) Status.WAITING))
+                foreach (var img in db.PicturesWaiting.Where(im => im.Status == (int) Status.WAITING))
                 {
                     imagesUrl.Add(Url.Content("~/Images/expectation/" + img.Name + "." + img.Expansion));
                 }
@@ -163,7 +154,7 @@ namespace Web_gellary.Controllers
         [Authorize(Roles = "Moderator")]
         public ActionResult Query()
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             ViewModel model = new ViewModel()
             {
                 User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
@@ -174,7 +165,7 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult GetInformationImage(string UrlImage)
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
             var Author = db.Users.Find(Image.UserId);
             Image.CountView++;
@@ -194,7 +185,7 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult GetComments(string UrlImage)
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
             List<Comment> Comments = null;
             if (User.Identity.IsAuthenticated)
@@ -219,7 +210,7 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult SetComment(string UrlImage, string Comment)
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
             var UserId = Int32.Parse(User.Identity.Name);
             var CommentImage = new CommentsToImages()
@@ -236,7 +227,7 @@ namespace Web_gellary.Controllers
         [HttpPost]
         public JsonResult PutImageLikes(string UrlImage)
         {
-            EGellaryEntities db = new EGellaryEntities();
+            EGalleryEntities db = new EGalleryEntities();
             var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
             var UserId = Int32.Parse(User.Identity.Name);
             var UserLike = db.LikesToImages.FirstOrDefault(li => li.ImageId == Image.Id && li.UserId == UserId);
@@ -250,6 +241,33 @@ namespace Web_gellary.Controllers
             }
             db.SaveChanges();
             return Json(db.Images.FirstOrDefault(img => img.Id == Image.Id).LikesToImages.Count, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteImage(string UrlImage)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            var Image = db.Images.FirstOrDefault(img => img.Name == UrlImage);
+            if (User.IsInRole("Moderator") && User.Identity.Name != Image.Users.UserURL)
+            {
+                var Picture = new PicturesWaiting()
+                {
+                    Expansion = Image.Expansion,
+                    DateUpload = Image.DateUpload,
+                    UserId = Image.UserId,
+                    Status = (int)Status.BLOCK
+                };
+                db.PicturesWaiting.Add(Picture);
+                db.SaveChanges();
+                MoveFile(Image.Name + "." + Image.Expansion, Picture.Name + "." + Picture.Expansion, "gallery", "block");
+                AnswerUser("Delete", Picture.Id, Picture.UserId);
+            } else
+            {
+                System.IO.File.Delete(GetPathToImg(Image.Name + "." + Image.Expansion, "gallery"));
+            }
+            db.Images.Remove(Image);
+            db.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

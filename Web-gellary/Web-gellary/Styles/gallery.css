@@ -1,16 +1,22 @@
-﻿.block-image>img {
+﻿.block-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.block-image>img {
     max-height: 100%;
     max-width: 240px;
     display: block;
-    margin: 0 auto;
 }
 
 .block-image {
-    padding-top: 50px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 260px; 
     height: 200px;
-    margin: 0 15px 15px 0; 
+    margin: 15px 5px; 
     padding: 10px 0; 
     border: 1px solid #44678f;
     cursor: pointer;
@@ -125,10 +131,14 @@
 }
 
 .footer-block {
-    text-align: left;
     background-color: #3a3a3b;
 	width:700px;
 	height:25px;
+    text-align: left;
+}
+
+.info {
+    text-align: left;
 }
 
 .footer-block>span {
@@ -303,5 +313,16 @@ textarea {
     color: #505152;
 }
 
-.digits, .count-images {
+.footer-block .delete {
+    cursor: pointer;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.footer-block .delete>i {
+    margin-right: 5px;
+}
+
+.footer-block .delete:hover {
+    color: #fff;
 }

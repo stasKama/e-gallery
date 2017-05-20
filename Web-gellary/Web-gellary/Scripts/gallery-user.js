@@ -89,9 +89,7 @@
     });
 
     $("#select-image").click(function () {
-        $("html").removeClass("hide-scroll");
-        $("a.scrollup").show();
-        $(".panel-view-img").removeClass("display-block");
+        closeViewImage();
     });
 
     $("textarea").keyup(function (e) {
@@ -121,13 +119,11 @@
     }
 
     $(".prev-image").click(function () {
-        srcImage = arrayImages[--indexImage];
-        setImage(srcImage);
+        setImage(arrayImages[--indexImage]);
     });
 
     $(".next-image").click(function () {
-        srcImage = arrayImages[++indexImage];
-        setImage(srcImage);
+        setImage(arrayImages[++indexImage]);
     });
 
     function testButton() {
@@ -142,6 +138,7 @@
     }
 
     function setImage(link) {
+        srcImage = link;
         $(".digits").text(indexImage + 1);
         $("#select-image").attr("src", link);
         getInformationImage();
@@ -166,5 +163,45 @@
         });
 
     });
+
+    $(".delete").click(function () {
+        let nameImage = srcImage.substring(srcImage.lastIndexOf("/") + 1, srcImage.lastIndexOf("."));
+        $.ajax({
+            url: "/Image/DeleteImage",
+            type: "POST",
+            data: {
+                UrlImage: nameImage
+            },
+            traditional: true,
+            dataType: "json",
+            success: function (data) {
+                $(".block-gallery .block-image img[src='" + srcImage + "']").parent().remove();
+                arrayImages = arrayImages.filter(function (x) {
+                    return x != srcImage;
+                });
+                if (arrayImages.length == 0) {
+                    closeViewImage();
+                } else {
+                    if (indexImage < arrayImages.length) {
+                        if (indexImage == arrayImages.length - 2) {
+                            uploadImageView();
+                        }
+                        setImage(arrayImages[++indexImage]);
+                    } else {
+                        setImage(arrayImages[--indexImage]);
+                    }
+                }
+            },
+            error: errorFunc
+        });
+    });
+
+    function closeViewImage() {
+        if ($("html").hasClass("hide-scroll")) {
+            $("html").removeClass("hide-scroll");
+            $("a.scrollup").show();
+        }
+        $(".panel-view-img").removeClass("display-block");
+    }
 
 });
