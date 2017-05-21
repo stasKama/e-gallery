@@ -22,11 +22,6 @@ namespace Web_gellary.Controllers
             };
             return View(model);
         }
-
-        public ActionResult AddImage()
-        {
-            return RedirectToAction("UploadImage");
-        }
         
         [HttpPost]
         public JsonResult AddImageAjax(string expansion, string fileData)

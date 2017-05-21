@@ -86,7 +86,7 @@ namespace Web_gellary.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "User with this email exist");
+                        ModelState.AddModelError("Email", "User with this email exist");
                     }
                 }
 

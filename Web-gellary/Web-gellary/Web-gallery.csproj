@@ -151,6 +151,7 @@
     <Content Include="Scripts\history.js" />
     <Content Include="Scripts\password.js" />
     <Content Include="Scripts\query-image.js" />
+    <Content Include="Scripts\redact-status.js" />
     <Content Include="Scripts\scrollup.js" />
     <Content Include="Scripts\upload-image.js" />
     <Content Include="Scripts\users-view.js" />

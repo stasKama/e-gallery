@@ -23,13 +23,66 @@
     height: 220px;
 }
 
+hr {
+    color: #44678f;
+}
+
+.profile {
+    color: #44678f;
+    font-family: Arial;
+    font-size: 15px;
+    display: flex;
+}
+
+.profile>img {
+    display: block;
+}
+
 .information>a {
     text-decoration: none;
     color: #44678f;
     font-family: Arial;
     font-size: 15px;
+    margin: 0 10px;
 }
 
 .information>a:hover {
     text-decoration: underline;
+}
+
+.online {
+    color: #009d00;
+}
+
+.offline {
+    color: #8d8d8d;
+}
+
+.offline, .online {
+    margin-right: 4px;
+}
+
+.state, .status {
+    margin-top: 15px;
+    font-size: 13px;
+} 
+
+.state, .status, .nick {
+    margin-left: 10px;
+    text-align: left;
+}
+
+.status {
+    cursor: pointer;
+}
+
+.user-status {
+    width: 200px;
+    height: 13px;
+}
+
+.status input {
+    width: 170px;
+    font-size: 13px;
+    outline: none;
 }

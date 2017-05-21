@@ -52,7 +52,7 @@
 
     function viewUsers(users) {
         for (let i = 0; i < users.length; i++) {
-            let icon = users[i].Status == "online" ? "fa fa-circle online" : "fa fa-circle no-online";
+            let icon = users[i].Status == "online" ? "fa fa-circle online" : "fa fa-circle offline";
             let user = '<div class="user">' +
             '<div>' +
                 '<a href="/Gallery/Home/' + users[i].Url + '">' +

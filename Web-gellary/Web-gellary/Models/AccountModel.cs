@@ -14,7 +14,6 @@ namespace Web_gellary.Models
 
         [Required(ErrorMessage = "Username is required.")]
         [Display(Name = "Username")]
-        [StringLength(40, MinimumLength = 1, ErrorMessage = "Username must be between 1 and 40 characters")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
@@ -23,6 +22,7 @@ namespace Web_gellary.Models
         [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$", ErrorMessage = "The password must contain the numbers and letters of the two registers")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Confirm Password is required.")]
         [Compare("Password", ErrorMessage = "Plese confirm your password.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]

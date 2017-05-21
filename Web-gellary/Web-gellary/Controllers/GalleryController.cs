@@ -131,6 +131,16 @@ namespace Web_gellary.Controllers
         }
 
         [HttpPost]
+        public JsonResult SetStatusUser(string Status)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
+            user.Status = Status;
+            db.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public JsonResult GetCountAnswer()
         {
             var UserId = Int32.Parse(User.Identity.Name);

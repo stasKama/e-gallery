@@ -4,7 +4,7 @@
 
 .list-users {
     display: flex;
-    width: 500px;
+    width: 460px;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
@@ -15,7 +15,7 @@
     margin-top: 5px;
     text-align: left;
     height: 100px;
-    width: 450px;
+    width: 430px;
     border-bottom: 0.5px solid #8d8d8d;
 }
 
@@ -48,10 +48,10 @@
     font-size: 12px;
 }
 
-.filter {
-    height: 200px;
-    width: 300px;
-    padding-top: 10px;
+.block-filter {
+    height: 350px;
+    width: 230px;
+    margin: 20px 0 0 40px; 
 }
 
 .upload-info {
@@ -68,6 +68,38 @@
     color: #009d00;
 }
 
-.no-online {
+.offline {
     color: #8d8d8d;
+}
+
+.search, .order, .filter {
+    width: 240px;
+    font-family: Arial;
+    font-size: 15.5px;
+    color: #44678f;
+    text-align: left;
+    margin: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #252525;
+}
+
+label, input {
+    font-family: Arial;
+    font-size: 14px;
+    margin: 7px;
+}
+
+label {
+    color: #44678f;
+}
+
+input {
+    border-radius: 2px;
+    outline: none;
+    color: #252525;
+    border: 1px solid #252525;
+}
+
+input:focus {
+    border: 1px solid #44678f;
 }

@@ -9,13 +9,47 @@
     <script src="~/Scripts/gallery-user.js"></script>
     <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/gallery.css" rel="stylesheet" type="text/css" />
+    @if (Model.User.UserURL == User.Identity.Name)
+    {
+        <script src="~/Scripts/redact-status.js"></script>
+    }
 }
 
 <div class="user-information">
     <div class="information">
-        <div>
+        <div class="profile">
             <img class="avatar-user" src="@Model.User.Avatar" />
-            @Model.User.Nick
+            <div>
+                <div class="nick">
+                    @Model.User.Nick
+                </div>
+                <div class="state">
+                    @Model.User.State
+                    @if (Model.User.State.Equals("online"))
+                    {
+                        <i class="fa fa-circle online"></i>}
+                    else
+                    {
+                        <i class="fa fa-circle offline "></i>
+                    }
+                </div>
+                <div class="status">
+                    <div>
+                        @if (Model.User.Status == "" || Model.User.Status == null)
+                        {
+                            <span class="user-status">"Click to change your status"</span>
+                        }
+                        else
+                        {
+                            <span class="user-status">@Model.User.Status</span>
+                        }
+                    </div>
+                    @if (Model.User.UserURL == User.Identity.Name)
+                    {
+                        <input type="text" class="enter-status" hidden />
+                    }
+                </div>
+            </div>
         </div>
     </div>
     @if (User.Identity.IsAuthenticated && Model.User.UserURL == User.Identity.Name)
@@ -25,8 +59,8 @@
             <a href="/Image/UploadImage" class="">Upload image</a>
         </div>
     }
-    <hr/>
 </div>
+<hr />
 <div class="block-gallery">
     
 </div>
