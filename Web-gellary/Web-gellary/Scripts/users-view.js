@@ -1,7 +1,56 @@
 ﻿$(document).ready(function () {
-    var users;
+    var nick = "";
+    var avatar = false;
+    var online = false;
+    var popular = false;
+
     $.post("/Gallery/GetUsers", function (data) {
-        users = data;
+        viewUsers(data);
+    });
+
+    function filter() {
+        $(".list-users").html("");
+        $.ajax({
+            url: "/Gallery/Filter",
+            type: "POST",
+            data: {
+                Nick: nick,
+                Online: online,
+                Avatar: avatar,
+                Popular: popular 
+            },
+            traditional: true,
+            dataType: "json",
+            success: function (data) {
+                viewUsers(data);
+            }
+        });
+    }
+
+    $(".avatar-filter").on("change", function () {
+        avatar = $(this).prop("checked");
+        console.log(avatar);
+        filter();
+    });
+
+    $(".online-filter").on("change", function () {
+        online = $(this).prop("checked");
+        console.log(online);
+        filter();
+    });
+
+    $(".popular-filter").on("change", function () {
+        popular = $(this).prop("checked");
+        console.log(popular);
+        filter();
+    });
+
+    $(".nick-filter").keyup(function () {
+        nick = $(".nick-filter").val();
+        filter();
+    });
+
+    function viewUsers(users) {
         for (let i = 0; i < users.length; i++) {
             let icon = users[i].Status == "online" ? "fa fa-circle online" : "fa fa-circle no-online";
             let user = '<div class="user">' +
@@ -26,5 +75,5 @@
         '</div>';
             $(".list-users").append(user);
         }
-    });
+    }
 });

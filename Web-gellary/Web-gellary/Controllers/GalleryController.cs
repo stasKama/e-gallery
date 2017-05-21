@@ -54,7 +54,7 @@ namespace Web_gellary.Controllers
         {
             EGalleryEntities db = new EGalleryEntities();
             List<UserViewModel> UsersModel = new List<UserViewModel>();
-            foreach(var user in db.Users.ToList())
+            foreach (var user in db.Users)
             {
                 UsersModel.Add(new UserViewModel()
                 {
@@ -64,7 +64,43 @@ namespace Web_gellary.Controllers
                     Status = user.State,
                     CountUploadImages = user.Images.Count()
                 });
-            } 
+            }
+            return Json(UsersModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Filter(string Nick, bool Online, bool Avatar, bool Popular)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            List<UserViewModel> UsersModel = new List<UserViewModel>();
+            IQueryable<Users> users = db.Users;
+            if (Nick != null || Nick != "")
+            {
+                users = db.Users.Where(u => u.Nick.Contains(Nick));
+            }
+            if (Online)
+            {
+                users = db.Users.Where(u => u.State == "online");
+            }
+            if (Avatar)
+            {
+                users = db.Users.Where(u => u.Avatar != "http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png");
+            }
+            if (Popular)
+            {
+                users = users.OrderByDescending(u => u.Images.Sum(im => im.LikesToImages.Count) / u.Images.Count);
+            }
+            foreach (var user in users)
+            {
+                UsersModel.Add(new UserViewModel()
+                {
+                    Url = user.UserURL,
+                    Avatar = user.Avatar,
+                    Nick = user.Nick,
+                    Status = user.State,
+                    CountUploadImages = user.Images.Count()
+                });
+            }
             return Json(UsersModel, JsonRequestBehavior.AllowGet);
         }
 
