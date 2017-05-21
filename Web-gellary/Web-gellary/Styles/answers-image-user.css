@@ -1,4 +1,10 @@
-﻿.block-answers {
+﻿h4, hr {
+    color: #44678f;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+.block-answers {
     display: flex;
     width: 520px;
     flex-direction: column;
@@ -13,6 +19,7 @@
     height: 70px;
     width: 450px;
     border-bottom: 0.5px solid #44678f;
+    margin: 4px 0 0 20px;
 }
 
 .up, .button-read {

@@ -300,5 +300,17 @@ namespace Web_gellary.Controllers
             answers.Reverse();
             return Json(answers, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult ReadAnswer(string NameImage, string Directory)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            var Image = db.PicturesWaiting.FirstOrDefault(p => p.Name == NameImage);
+            var Answer = db.Answers.FirstOrDefault(a => a.PictureId == Image.Id);
+            db.Answers.Remove(Answer);
+            db.SaveChanges();
+            System.IO.File.Delete(GetPathToImg(Image.Name + "." + Image.Expansion, Directory));
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -1,11 +1,13 @@
 ﻿$(document).ready(function () {
+    var countAnswers = 0;
+
     $.post("/Image/GetAnswers", function (data) {
         let answers = data;
-        console.log(data);
+        countAnswers = answers.length;
         for (let i = 0; i < answers.length; i++) {
             let text = answers[i].Text.split("image");
             let message = "<div class='text'><div class='up'>" + text[0] + "<span class='tooltip'>image" +
-                "<img src='" + answers[i].UrlImage + "'/>" + text[1] + "</span></div><div class='down'>" +
+                "<img class='image-answer' src='" + answers[i].UrlImage + "'/>" + text[1] + "</span></div><div class='down'>" +
                 answers[i].DateAnswer.split(" ")[0] + "</div></div>";
             let block = "<div class='answer'>" + message +
                 "<div class='button-read'><div>Read</div></div>" +
@@ -15,7 +17,25 @@
     });
 
     $(".block-answers").on("click", ".button-read", function () {
-        console.log("text");
+        var block = this;
+        var srcImageAnswer = $(".image-answer").attr("src");
+        srcImageAnswer = srcImageAnswer.split("Images/")[1].split("/");
+        var directory = srcImageAnswer[0];
+        var nameImage = srcImageAnswer[1].split(".")[0];
+        $.ajax({
+            url: "/Image/ReadAnswer",
+            type: "POST",
+            data: {
+                NameImage: nameImage,
+                Directory: directory
+            },
+            traditional: true,
+            dataType: "json",
+            success: function (data) {
+                $(block).parent().remove();
+                $("#count-answer").text(--countAnswers == 0 ? "" : countAnswers);
+            }
+        });
     });
 
 });
