@@ -147,8 +147,16 @@
     <Content Include="Scripts\answers.js" />
     <Content Include="Scripts\count-answers.js" />
     <Content Include="Scripts\count-query.js" />
+    <Content Include="Scripts\edit-profile.js" />
     <Content Include="Scripts\gallery-user.js" />
     <Content Include="Scripts\history.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\password.js" />
     <Content Include="Scripts\query-image.js" />
     <Content Include="Scripts\redact-status.js" />
@@ -156,6 +164,7 @@
     <Content Include="Scripts\upload-image.js" />
     <Content Include="Scripts\users-view.js" />
     <Content Include="Styles\answers-image-user.css" />
+    <Content Include="Styles\edit-profile.css" />
     <Content Include="Styles\gallery.css" />
     <Content Include="Styles\history-view-image.css" />
     <Content Include="Styles\layout.css" />
@@ -185,7 +194,7 @@
     <Compile Include="Models\CommentsToImages.cs">
       <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EditUserModel.cs" />
+    <Compile Include="Models\UpdatePassword.cs" />
     <Compile Include="Models\GalleryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,7 +230,6 @@
     <Compile Include="Models\Verification.cs">
       <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +255,7 @@
     <Content Include="Models\GalleryModel.edmx.diagram">
       <DependentUpon>GalleryModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Edit\EditPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

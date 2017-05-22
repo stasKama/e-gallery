@@ -25,7 +25,6 @@
                 $(previewId).attr("src", theImage.src);
                 imageWidth = theImage.width;
                 imageHeight = theImage.height;
-                console.log("ширина " + imageWidth + " высота " + imageHeight);
                 var classImage = imageWidth < 450 && imageHeight < 330 ? "" : imageWidth == imageHeight ? "horizontal-image" :
                  imageWidth > imageHeight ? "vertical-image" : "horizontal-image";
                 $(previewId).addClass(classImage);

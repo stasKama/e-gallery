@@ -24,8 +24,6 @@
 }
 
 .form-upload-image {
-    position: relative;
-    display: inline-block;
     color: #44678f;
     font-family: Arial;
     font-size: 15px;
@@ -38,7 +36,6 @@
 }
 
 .left-div {
-    position: absolute;
     height: 350px;
     width: 200px;
     left:10px;
@@ -50,7 +47,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    position: absolute;
     height: 350px;
     width: 470px;
     right:10px;
@@ -68,11 +64,15 @@
 }
 
 .field-message {
-    padding-top: 30px;
+    padding-top: 10px;
+}
+
+.form {
+    display: flex;
 }
 
 #upload {
-    width: 130px;
+    width: 150px;
     height: 25px;
     color: #feffff;
     padding-left: 20px;

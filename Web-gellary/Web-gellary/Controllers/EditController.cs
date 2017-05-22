@@ -13,46 +13,62 @@ namespace Web_gellary.Controllers
         [Authorize]
         public ActionResult Edit()
         {
-            EGalleryEntities db = new EGalleryEntities();
-            var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
-            user.Password = "";
-            EditUserModel model = new EditUserModel()
-            {
-                User = user,
-                UserPassword = new UpdatePassword()
-            };
-            return View(model);
+            return View();
         }
 
         [HttpPost]
-        public JsonResult EditAvatar(string fileData)
+        public JsonResult EditAvatar(string fileData, string expansion)
         {
             EGalleryEntities db = new EGalleryEntities();
             var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
-            var serverPath = Server.MapPath("~");
-            var path = Path.Combine(serverPath, "Images", "avatar", user.UserURL + ".jpg");
-            var dataIndex = fileData.IndexOf("base64", StringComparison.Ordinal) + 7;
-            var cleareData = fileData.Substring(dataIndex);
-            var fileInformation = Convert.FromBase64String(cleareData);
-            var bytes = fileInformation.ToArray();
-            var fileStream = System.IO.File.Create(path);
-            fileStream.Write(bytes, 0, bytes.Length);
-            fileStream.Close();
-            user.Avatar = Url.Content("~/Images/avatar/" + user.UserURL + ".jpg");
+            System.IO.File.Delete(GetPathToImg(user.Avatar, "avatar"));
+            ImageSave.Save(fileData, GetPathToImg(user.UserURL + "." + expansion, "avatar"));
+            user.Avatar = Url.Content("~/Images/avatar/" + user.UserURL + "." + expansion);
             db.SaveChanges();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult EditPassword()
+        public JsonResult EditNick(string Nick)
         {
+            EGalleryEntities db = new EGalleryEntities();
+            var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
+            user.Nick = Nick;
+            db.SaveChanges();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public JsonResult EditNick()
+        private string GetPathToImg(string fileName, string directory)
         {
-            return Json(true, JsonRequestBehavior.AllowGet);
+            var serverPath = Server.MapPath("~");
+            return Path.Combine(serverPath, "Images", directory, fileName);
+        }
+
+        public ActionResult EditPassword()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPassword(UpdatePassword model)
+        {
+            if (ModelState.IsValid)
+            {
+                EGalleryEntities db = new EGalleryEntities();
+                var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
+                if (user.Password == model.OldPassword)
+                {
+                    user.Password = model.NewPassword;
+                    db.SaveChanges();
+                    ViewBag.Message = "Edit Password";
+                }
+                else
+                {
+                    ModelState.AddModelError("OldPassword", "You have entered the wrong password");
+                }
+            }
+            return PartialView(); 
         }
     }
 }

@@ -28,24 +28,21 @@ namespace Web_gellary.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            using (EGalleryEntities db = new EGalleryEntities())
             {
-                using (EGalleryEntities db = new EGalleryEntities())
+                Users user = db.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+                if (user != null)
                 {
-                    Users user = db.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
-                    if (user != null)
-                    {
-                        user.State = "online";
-                        db.SaveChanges();
-                        FormsAuthentication.SetAuthCookie(user.UserURL, false);
-                        return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
-                            new { controller = "Gallery", action = "Home", id = user.UserURL }));
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError("", "There is no such user");
-                    }
+                    user.State = "online";
+                    db.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(user.UserURL, false);
+                    return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
+                        new { controller = "Gallery", action = "Home", id = user.UserURL }));
+                }
+                else
+                {
+                    ModelState.Clear();
+                    ModelState.AddModelError("", "There is no such user");
                 }
             }
             return View();

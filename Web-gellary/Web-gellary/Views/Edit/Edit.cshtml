@@ -1,39 +1,55 @@
-﻿@model Web_gellary.Models.EditUserModel
-
-@{
+﻿@{
     ViewBag.Title = "Edit Profile";
     Layout = "~/Views/_Layout.cshtml";
 }
+@section head {
+    <script src="~/Scripts/edit-profile.js"></script>
+    <link href="~/Styles/edit-profile.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
 
-<div>
-    @Html.AntiForgeryToken()
+<div class="form-edit-nick">
+    <div class="header-form">
+        <h4>Edit Nick</h4>
+    </div>
+    <div class="fields">
+        <div class="nick-lable">
+            <label id="nick" for="nick">You New Nick</label>
+        </div>
+        <div class="nick-input">
+            <input type="text" id="field-nick" name="nick" />
+        </div>
+        <div class="nick-message">
+            <span id="message"></span>
+        </div>
+    </div>
+    <div class="footer-form">
+        <div class="save"><div>Save</div></div>
+    </div>
+</div>
 
-    <div class="form-horizontal">
+<div class="form-edit-avatar">
+    <div class="header-form">
         <h4>Edit Avatar</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <input type="submit" value="Edit Avatar" class="btn btn-default" />
+    </div>
+    <div class="content-form">
+        <div class="left-content-form">
+            <div class="field-choose-file">
+                <label id="lable-file"><input type="file" name="file" id="file" multiple accept="image/*" /><i class="fa fa-file-image-o"></i>Choose image</label>
+            </div>
+            <div class="field-submit">
+                <input type="submit" id="upload" value="Upload" disabled />
+            </div>
+        </div>
+        <div class="right-content-form">
+            <img id="preview" />
+        </div>
+    </div>
+    <div class="footer-form">
+        <div class="button-form"><div></div></div>
     </div>
 </div>
 
-<div>
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Edit Nike</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <input type="submit" value="Edit Nike" class="btn btn-default" />
-    </div>
-</div>
-
-<div>
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Edit Password</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <input type="submit" value="Edit Password" class="btn btn-default" />
-    </div>
+<div id="divContainer" class="form-edit-password">
+    @Html.Partial("EditPassword")
 </div>

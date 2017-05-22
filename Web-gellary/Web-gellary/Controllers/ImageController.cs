@@ -15,12 +15,7 @@ namespace Web_gellary.Controllers
         [Authorize]
         public ActionResult UploadImage()
         {
-            EGalleryEntities db = new EGalleryEntities();
-            ViewModel model = new ViewModel()
-            {
-                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
-            };
-            return View(model);
+            return View();
         }
         
         [HttpPost]
@@ -149,12 +144,7 @@ namespace Web_gellary.Controllers
         [Authorize(Roles = "Moderator")]
         public ActionResult Query()
         {
-            EGalleryEntities db = new EGalleryEntities();
-            ViewModel model = new ViewModel()
-            {
-                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
-            };
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -268,12 +258,7 @@ namespace Web_gellary.Controllers
         [Authorize(Roles = "User")]
         public ActionResult Answers()
         {
-            EGalleryEntities db = new EGalleryEntities();
-            ViewModel model = new ViewModel()
-            {
-                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
-            };
-            return View(model);
+            return View();
         }
 
         [HttpPost]

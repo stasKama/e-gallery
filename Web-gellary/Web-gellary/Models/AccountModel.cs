@@ -18,7 +18,7 @@ namespace Web_gellary.Models
 
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 30 characters")]
+        [StringLength(30, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 30 characters")]
         [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$", ErrorMessage = "The password must contain the numbers and letters of the two registers")]
         public string Password { get; set; }
 

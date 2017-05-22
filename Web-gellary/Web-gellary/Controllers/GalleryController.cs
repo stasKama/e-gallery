@@ -16,11 +16,8 @@ namespace Web_gellary.Controllers
         {
             UserId = id;
             EGalleryEntities db = new EGalleryEntities();
-            ViewModel model = new ViewModel()
-            {
-                User = db.Users.FirstOrDefault(u => u.UserURL == id)
-            };
-            return View(model);
+            var User = db.Users.FirstOrDefault(u => u.UserURL == id);
+            return View(User);
         }
 
         [HttpPost]
@@ -41,12 +38,7 @@ namespace Web_gellary.Controllers
 
         public ActionResult Users()
         {
-            EGalleryEntities db = new EGalleryEntities();
-            ViewModel model = new ViewModel()
-            {
-                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name)
-            };
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -107,12 +99,7 @@ namespace Web_gellary.Controllers
         public ActionResult History()
         {
             CountSkip = 0;
-            EGalleryEntities db = new EGalleryEntities();
-            ViewModel model = new ViewModel()
-            {
-                User = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name),
-            };
-            return View(model);
+            return View();
         }
 
         [HttpPost]

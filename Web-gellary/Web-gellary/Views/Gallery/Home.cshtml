@@ -1,4 +1,4 @@
-﻿@model Web_gellary.Models.ViewModel
+﻿@model Web_gellary.Models.Users
 
 @{
     ViewBag.Title = "Home";
@@ -9,7 +9,7 @@
     <script src="~/Scripts/gallery-user.js"></script>
     <link href="~/Styles/profile-user.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/gallery.css" rel="stylesheet" type="text/css" />
-    @if (Model.User.UserURL == User.Identity.Name)
+    @if (Model.UserURL == User.Identity.Name)
     {
         <script src="~/Scripts/redact-status.js"></script>
     }
@@ -18,14 +18,14 @@
 <div class="user-information">
     <div class="information">
         <div class="profile">
-            <img class="avatar-user" src="@Model.User.Avatar" />
+            <img class="avatar-user" src="@Model.Avatar" />
             <div>
                 <div class="nick">
-                    @Model.User.Nick
+                    @Model.Nick
                 </div>
                 <div class="state">
-                    @Model.User.State
-                    @if (Model.User.State.Equals("online"))
+                    @Model.State
+                    @if (Model.State.Equals("online"))
                     {
                         <i class="fa fa-circle online"></i>}
                     else
@@ -35,16 +35,19 @@
                 </div>
                 <div class="status">
                     <div>
-                        @if (Model.User.Status == "" || Model.User.Status == null)
+                        @if (Model.Status == "" || Model.Status == null)
                         {
-                            <span class="user-status">"Click to change your status"</span>
+                            if (Model.UserURL == User.Identity.Name)
+                            {
+                                <span class="user-status">"Click to change your status"</span>
+                            }
                         }
                         else
                         {
-                            <span class="user-status">@Model.User.Status</span>
+                            <span class="user-status">@Model.Status</span>
                         }
                     </div>
-                    @if (Model.User.UserURL == User.Identity.Name)
+                    @if (Model.UserURL == User.Identity.Name)
                     {
                         <input type="text" class="enter-status" hidden />
                     }
@@ -52,7 +55,7 @@
             </div>
         </div>
     </div>
-    @if (User.Identity.IsAuthenticated && Model.User.UserURL == User.Identity.Name)
+    @if (User.Identity.IsAuthenticated && Model.UserURL == User.Identity.Name)
     {
         <div class="information">
             <a href="/Edit/Edit" class="">Editing profile</a>
@@ -77,7 +80,7 @@
             </div>
             <div class="footer-block">
                 <span>Image:<span class="digits"></span>of<span class="count-images"></span></span>
-                @if (User.Identity.Name == Model.User.UserURL || User.IsInRole("Moderator"))
+                @if (User.Identity.Name == Model.UserURL || User.IsInRole("Moderator"))
                 {
                     <span class="delete"><i class="fa fa-trash-o"></i>Delete</span>
                 }
