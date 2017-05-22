@@ -165,6 +165,7 @@
     <Content Include="Scripts\users-view.js" />
     <Content Include="Styles\answers-image-user.css" />
     <Content Include="Styles\edit-profile.css" />
+    <Content Include="Styles\error-page.css" />
     <Content Include="Styles\gallery.css" />
     <Content Include="Styles\history-view-image.css" />
     <Content Include="Styles\layout.css" />
@@ -256,6 +257,7 @@
       <DependentUpon>GalleryModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Edit\EditPassword.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

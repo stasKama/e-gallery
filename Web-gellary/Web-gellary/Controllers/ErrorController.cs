@@ -8,6 +8,9 @@ namespace Web_gellary.Controllers
 {
     public class ErrorController : Controller
     {
-       
+       public ActionResult NotFound()
+        {
+            return View();
+        }
     }
 }
