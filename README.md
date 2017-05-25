@@ -165,14 +165,11 @@
 <b>Users Page</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39d08/GBlCJb0BWSQ.jpg"/>
 
-<b>History (Gallery All Users) Page</b
+<b>History (Gallery All Users) Page</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39ce2/QsG4iFZrVco.jpg"/>
 
 <b>Upload Image Page</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39cfe/feUw93yA3YQ.jpg"/>
-
-<b>Edit Page</b>
-<img src="https://pp.userapi.com/c836322/v836322646/39cd8/IPyYCag2d5A.jpg"/>
 
 <b>Edit Page</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39cd8/IPyYCag2d5A.jpg"/>
