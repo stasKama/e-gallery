@@ -6,10 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Web_gellary.Filters;
 using Web_gellary.Models;
 
 namespace Web_gellary.Controllers
 {
+    [Language]
     public class ImageController : Controller
     {
         [Authorize]

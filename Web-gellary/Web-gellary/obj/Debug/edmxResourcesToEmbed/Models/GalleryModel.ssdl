@@ -64,6 +64,7 @@
     <Property Name="Permission" Type="int" Nullable="false" />
     <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Status" Type="varchar" MaxLength="255" />
+    <Property Name="CodeLanguage" Type="varchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="Verification">
     <Key>

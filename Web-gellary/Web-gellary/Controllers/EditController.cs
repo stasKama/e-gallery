@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_gellary.Filters;
 using Web_gellary.Models;
 
 namespace Web_gellary.Controllers
 {
+    [Language]
     public class EditController : Controller
     {
         [Authorize]
@@ -69,6 +71,17 @@ namespace Web_gellary.Controllers
                 }
             }
             return PartialView(); 
+        }
+
+        [HttpPost]
+        public ActionResult EditLanguage(string CodeLanguage)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
+            user.CodeLanguage = CodeLanguage;
+            db.SaveChanges();
+            Response.Cookies.Add(EditLanguageUserPage.EditLanguage(user.CodeLanguage, Request.Cookies["lang"]));
+            return View("Edit");
         }
     }
 }

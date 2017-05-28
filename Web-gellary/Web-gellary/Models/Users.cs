@@ -27,6 +27,7 @@ namespace Web_gellary.Models
             this.State = "online";
             this.Permission = 10;
             this.Role = "User";
+            this.CodeLanguage = "en";
         }
     
         public int Id { get; set; }
@@ -39,6 +40,7 @@ namespace Web_gellary.Models
         public int Permission { get; set; }
         public string Role { get; set; }
         public string Status { get; set; }
+        public string CodeLanguage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answers> Answers { get; set; }

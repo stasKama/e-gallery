@@ -8,22 +8,28 @@ namespace Web_gellary.Models
 {
     public class UpdatePassword
     {
-        [Required(ErrorMessage = "Old Password is required.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "OldPasswordRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Old Password")]
+        [Display(Name = "OldPassword", ResourceType = typeof(Resources.Resource))]
         public string OldPassword { get; set; }
 
-        [Required(ErrorMessage = "New Password is required.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "NewPasswordRequired")]
         [DataType(DataType.Password)]
-        [StringLength(30, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 30 characters")]
-        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$", ErrorMessage = "The password must contain the numbers and letters of the two registers")]
-        [Display(Name = "New Password")]
+        [StringLength(30, MinimumLength = 8, ErrorMessageResourceName = "LengthPassword",
+                  ErrorMessageResourceType = typeof(Resources.Resource))]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$", ErrorMessageResourceName = "ValidationPassword",
+                  ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Display(Name = "NewPassword", ResourceType = typeof(Resources.Resource))]
         public string NewPassword { get; set; }
 
-        [Required(ErrorMessage = "Comfirm Password is required.")]
-        [Compare("NewPassword", ErrorMessage = "Plese confirm your password.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "ConfirmPasswordRequired")]
+        [Compare("NewPassword", ErrorMessageResourceName = "ComparePassword",
+                  ErrorMessageResourceType = typeof(Resources.Resource))]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resources.Resource))]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Web_gellary.Models
         {
             this.Date = DateTime.Now;
         }
+
         public int Id { get; set; }
         public int UserId { get; set; }
         public int PictureId { get; set; }

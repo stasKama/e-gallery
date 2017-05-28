@@ -13,14 +13,14 @@
 @using (Html.BeginForm("Login", "Account", new { enctype = "multipart/form-data" }, FormMethod.Post, htmlAttributes: new { @class = "form-login-user" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Login</h4>
+    <h4>@Resources.Resource.Login</h4>
     <hr />
     <div class="field">
         <div class="lable">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
         </div>
         <div class="input">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = Resources.Resource.Email, @class = "" } })
         </div>
     </div>
 
@@ -30,14 +30,14 @@
         </div>
         <div class="password">
             <div class="field-password">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "password-view" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = Resources.Resource.Password, @class = "password-view" } })
                 <div class="view"><i class="fa fa-eye"></i></div>
             </div>
         </div>
     </div>
     <div class="button-form">
-        <input type="submit" value="Login" />
-        <a href="@Url.Action("Registration", "Account")">Registration</a>
+        <input type="submit" value="@Resources.Resource.Login" />
+        <a href="@Url.Action("Registration", "Account")">@Resources.Resource.Registration</a>
     </div>
     @Html.ValidationSummary(true)
 }

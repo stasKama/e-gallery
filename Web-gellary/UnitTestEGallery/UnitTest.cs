@@ -71,7 +71,7 @@ namespace UnitTestEGallery
             errorSpan = driver.FindElements(By.ClassName("field-validation-error"));
             Assert.AreEqual(2, errorSpan.Count, "Test count error message");
             Assert.AreEqual("Username is required.", errorSpan.First().Text, "Test error message Nick");
-            Assert.AreEqual("The password must contain the numbers and letters of the two registers", errorSpan.Last().Text, "Test error message Password");
+            Assert.AreEqual("The password must contain the numbers and letters of the two registers.", errorSpan.Last().Text, "Test error message Password");
 
             driver.FindElement(By.Name("Email")).Clear();
 
@@ -82,7 +82,7 @@ namespace UnitTestEGallery
             driver.FindElementByClassName("form-registration-user").Submit();
             errorSpan = driver.FindElements(By.ClassName("field-validation-error"));
             Assert.AreEqual(1, errorSpan.Count, "Test count error message");
-            Assert.AreEqual("Plese confirm your password.", errorSpan.First().Text, "Test error message Confirm Password");
+            Assert.AreEqual("Please confirm your password.", errorSpan.First().Text, "Test error message Confirm Password");
 
             driver.FindElement(By.Name("Email")).Clear();
             driver.FindElement(By.Name("Username")).Clear();
@@ -94,7 +94,7 @@ namespace UnitTestEGallery
             driver.FindElementByClassName("form-registration-user").Submit();
             errorSpan = driver.FindElements(By.ClassName("field-validation-error"));
             Assert.AreEqual(1, errorSpan.Count, "Test count error message");
-            Assert.AreEqual("User with this email exist", errorSpan.First().Text, "Test error message Email");
+            Assert.AreEqual("User with this email exist.", errorSpan.First().Text, "Test error message Email");
 
             driver.FindElement(By.Name("Email")).Clear();
             driver.FindElement(By.Name("Username")).Clear();
@@ -106,7 +106,7 @@ namespace UnitTestEGallery
             driver.FindElementByClassName("form-registration-user").Submit();
             errorSpan = driver.FindElements(By.ClassName("field-validation-error"));
             Assert.AreEqual(1, errorSpan.Count, "Test count error message");
-            Assert.AreEqual("Invalid email addres", errorSpan.First().Text, "Test error message Email");
+            Assert.AreEqual("Invalid email address.", errorSpan.First().Text, "Test error message Email");
 
             driver.FindElement(By.Name("Email")).Clear();
             driver.FindElement(By.Name("Username")).Clear();

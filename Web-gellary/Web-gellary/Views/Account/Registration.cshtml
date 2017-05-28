@@ -15,7 +15,7 @@
     @Html.AntiForgeryToken()
 
     <div class="">
-        <h4>Registration</h4>
+        <h4>@Resources.Resource.Registration</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "" })
         <div class="field">
@@ -23,7 +23,7 @@
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
             </div>
             <div class="input">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Email", @class = "" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = Resources.Resource.Email, @class = "" } })
             </div>
             <div class="message">
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "decoration-message" })
@@ -35,7 +35,7 @@
                 @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "" })
             </div>
             <div class="input">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { placeholder = "Username", @class = "" } })
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { placeholder = Resources.Resource.Username, @class = "" } })
             </div>
             <div class="message">
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "decoration-message" })
@@ -49,7 +49,7 @@
             <div class="input">
                 <div class="password">
                     <div class="field-password">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "password-view" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = Resources.Resource.Password, @class = "password-view" } })
                         <div class="view"><i class="fa fa-eye"></i></div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
             <div class="input">
                 <div class="password">
                     <div class="field-password">
-                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = "Confirm Password", @class = "password-view" } })
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = Resources.Resource.ConfirmPassword, @class = "password-view" } })
                         <div class="view"><i class="fa fa-eye"></i></div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="button-form">
-            <input type="submit" value="Registration" />
+            <input type="submit" value="@Resources.Resource.Registration" />
         </div>
     </div>
 }           

@@ -59,6 +59,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="GalleryModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="CodeLanguage" ColumnName="CodeLanguage" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserURL" ColumnName="UserURL" />
           <ScalarProperty Name="Email" ColumnName="Email" />

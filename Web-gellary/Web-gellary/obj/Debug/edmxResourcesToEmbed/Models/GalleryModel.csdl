@@ -81,6 +81,7 @@
     <NavigationProperty Name="LikesToImages" Relationship="Self.FK__LikesToIm__UserI__2FCF1A8A" FromRole="Users" ToRole="LikesToImages" />
     <NavigationProperty Name="PicturesWaiting" Relationship="Self.FK__PicturesW__UserI__503BEA1C" FromRole="Users" ToRole="PicturesWaiting" />
     <NavigationProperty Name="Verification" Relationship="Self.FK__Verificat__UserI__5070F446" FromRole="Users" ToRole="Verification" />
+    <Property Name="CodeLanguage" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Verification">
     <Key>

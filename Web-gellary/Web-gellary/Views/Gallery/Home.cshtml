@@ -58,8 +58,8 @@
     @if (User.Identity.IsAuthenticated && Model.UserURL == User.Identity.Name)
     {
         <div class="information">
-            <a href="/Edit/Edit" class="">Editing profile</a>
-            <a href="/Image/UploadImage" class="">Upload image</a>
+            <a href="/Edit/Edit" class="">@Resources.Resource.EditingProfile</a>
+            <a href="/Image/UploadImage" class="">@Resources.Resource.UploadImage</a>
         </div>
     }
 </div>
@@ -79,10 +79,10 @@
                 <div class="next-image">&gt;</div>
             </div>
             <div class="footer-block">
-                <span>Image:<span class="digits"></span>of<span class="count-images"></span></span>
+                <span>@Resources.Resource.Image :<span class="digits"></span>@Resources.Resource.of<span class="count-images"></span></span>
                 @if (User.Identity.Name == Model.UserURL || User.IsInRole("Moderator"))
                 {
-                    <span class="delete"><i class="fa fa-trash-o"></i>Delete</span>
+                    <span class="delete"><i class="fa fa-trash-o"></i>@Resources.Resource.Delete</span>
                 }
             </div>
         </div>
@@ -109,7 +109,7 @@
 
                 </div>
                 <div class="field-for-comment">
-                    <textarea class="your-comment" placeholder="Enter your comment..."></textarea>
+                    <textarea class="your-comment" placeholder="@Resources.Resource.FieldEnterComment"></textarea>
                 </div>
             }
             else
@@ -119,7 +119,7 @@
                         <i class="fa fa-lock"></i>
                     </div>
                     <div>
-                        To view comments you must be an authorized user.
+                        @Resources.Resource.MessageNoAuthorizedUser
                     </div>
                 </div>
             }

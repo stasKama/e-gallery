@@ -8,24 +8,34 @@ namespace Web_gellary.Models
 {
     public class AccountModel
     {
-        [Required(ErrorMessage = "Email is required.")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Invalid email addres")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "EmailRequired")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "EmailException")]
+        [Display(Name = "Email", ResourceType = typeof(Resources.Resource))]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Username is required.")]
-        [Display(Name = "Username")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "UsernameRequired")]
+        [Display(Name = "Username", ResourceType = typeof(Resources.Resource))]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
-        [StringLength(30, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 30 characters")]
-        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$", ErrorMessage = "The password must contain the numbers and letters of the two registers")]
+        [StringLength(30, MinimumLength = 8, ErrorMessageResourceName ="LengthPassword",
+                  ErrorMessageResourceType = typeof(Resources.Resource))]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,15}$", ErrorMessageResourceName = "ValidationPassword",
+                  ErrorMessageResourceType = typeof(Resources.Resource))]
+        [Display(Name = "Password", ResourceType = typeof(Resources.Resource))]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password is required.")]
-        [Compare("Password", ErrorMessage = "Plese confirm your password.")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                  ErrorMessageResourceName = "ConfirmPasswordRequired")]
+        [Compare("Password", ErrorMessageResourceName = "ComparePassword",
+                  ErrorMessageResourceType = typeof(Resources.Resource))]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resources.Resource))]
         public string ConfirmPassword { get; set; }
     }
 }

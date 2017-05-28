@@ -5,10 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using Web_gellary.Filters;
 using Web_gellary.Models;
 
 namespace Web_gellary.Controllers
 {
+    [Language]
     public class AccountController : Controller
     {
         public ActionResult Login()
@@ -36,13 +38,14 @@ namespace Web_gellary.Controllers
                     user.State = "online";
                     db.SaveChanges();
                     FormsAuthentication.SetAuthCookie(user.UserURL, false);
+                    Response.Cookies.Add(EditLanguageUserPage.EditLanguage(user.CodeLanguage, Request.Cookies["lang"]));
                     return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
                         new { controller = "Gallery", action = "Home", id = user.UserURL }));
                 }
                 else
                 {
-                    ModelState.Clear();
-                    ModelState.AddModelError("", "There is no such user");
+                    ModelState.Clear(); 
+                    ModelState.AddModelError("", Resources.Resource.NoSuchUser);
                 }
             }
             return View();
@@ -83,7 +86,7 @@ namespace Web_gellary.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Email", "User with this email exist");
+                        ModelState.AddModelError("Email", Resources.Resource.EmailExist);
                     }
                 }
 

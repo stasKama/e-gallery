@@ -7,3 +7,12 @@ C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\UnitTestEGallery\bin\Debug\Web
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\UnitTestEGallery\obj\Debug\UnitTestEGallery.csprojResolveAssemblyReference.cache
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\UnitTestEGallery\obj\Debug\UnitTestEGallery.dll
 C:\Users\Lenovo\Documents\Web-gallery\Web-gellary\UnitTestEGallery\obj\Debug\UnitTestEGallery.pdb
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\bin\Debug\UnitTestEGallery.dll
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\bin\Debug\UnitTestEGallery.pdb
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\bin\Debug\nunit.framework.dll
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\bin\Debug\WebDriver.dll
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\bin\Debug\nunit.framework.xml
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\bin\Debug\WebDriver.xml
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\obj\Debug\UnitTestEGallery.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\obj\Debug\UnitTestEGallery.dll
+C:\Users\Lenovo\Documents\Web-gallery\e-gallery\Web-gellary\UnitTestEGallery\obj\Debug\UnitTestEGallery.pdb

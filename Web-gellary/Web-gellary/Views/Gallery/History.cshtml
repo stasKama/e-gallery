@@ -9,7 +9,7 @@
     <link href="~/Styles/gallery.css" rel="stylesheet" type="text/css" />
 }
 
-<h4>Collection all users images</h4>
+<h4>@Resources.Resource.HeaderHistoryPage</h4>
 <hr/>
 <div class="block-gallery">
 
@@ -26,10 +26,10 @@
                 <div class="next-image">&gt;</div>
             </div>
             <div class="footer-block">
-                <span class="info">Image:<span class="digits"></span>of<span class="count-images"></span></span>
+                <span class="info">@Resources.Resource.Image :<span class="digits"></span>@Resources.Resource.of<span class="count-images"></span></span>
                 @if (User.IsInRole("Moderator"))
                 {
-                <span class="delete"><i class="fa fa-trash-o"></i>Delete</span>
+                <span class="delete"><i class="fa fa-trash-o"></i>@Resources.Resource.Delete</span>
                 }
             </div>
         </div>
@@ -56,7 +56,7 @@
 
                 </div>
                 <div class="field-for-comment">
-                    <textarea class="your-comment" placeholder="Enter your comment..."></textarea>
+                    <textarea class="your-comment" placeholder="@Resources.Resource.FieldEnterComment"></textarea>
                 </div>
             }
             else
@@ -66,7 +66,7 @@
                         <i class="fa fa-lock"></i>
                     </div>
                     <div>
-                        To view comments you must be an authorized user.
+                        @Resources.Resource.MessageNoAuthorizedUser
                     </div>
                 </div>
             }

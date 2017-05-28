@@ -1,4 +1,4 @@
-﻿.form-edit-avatar, .form-edit-nick, .form-edit-password {
+﻿.form-edit-avatar, .form-edit-nick, .form-edit-password, .form-edit-language {
     margin-top: 20px;
     width: 700px; 
     border: 1px solid #44678f;
@@ -150,12 +150,13 @@
     text-align: left;
     margin: 15px;
     display: flex;
+    font-size: 13px;
 }
 
 .lable {
     color: #44678f;
     display: inline-block;
-    width: 130px;
+    width: 150px;
 }
 
 .input {
@@ -232,4 +233,26 @@ input {
     list-style: none;
     color: #ff0000;
     text-align: left;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    width: 200px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("Styles/icon-select.png") no-repeat 90% 50%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 200px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
 }

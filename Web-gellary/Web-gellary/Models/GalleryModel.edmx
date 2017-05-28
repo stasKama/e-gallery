@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище GalleryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище GalleryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="Id" />
@@ -69,6 +69,7 @@
           <Property Name="Permission" Type="int" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="255" />
+          <Property Name="CodeLanguage" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Verification">
           <Key>
@@ -231,8 +232,7 @@
             <End Role="Verification" EntitySet="Verification" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GalleryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -317,6 +317,7 @@
           <NavigationProperty Name="LikesToImages" Relationship="Self.FK__LikesToIm__UserI__2FCF1A8A" FromRole="Users" ToRole="LikesToImages" />
           <NavigationProperty Name="PicturesWaiting" Relationship="Self.FK__PicturesW__UserI__503BEA1C" FromRole="Users" ToRole="PicturesWaiting" />
           <NavigationProperty Name="Verification" Relationship="Self.FK__Verificat__UserI__5070F446" FromRole="Users" ToRole="Verification" />
+          <Property Name="CodeLanguage" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Verification">
           <Key>
@@ -544,6 +545,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GalleryModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="CodeLanguage" ColumnName="CodeLanguage" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserURL" ColumnName="UserURL" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

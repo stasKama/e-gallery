@@ -8,13 +8,37 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 }
 
+<div class="form-edit-language">
+@using (Html.BeginForm("EditLanguage", "Edit", new { enctype = "multipart/form-data" }, FormMethod.Post))
+{
+    <div class="header-form">
+        <h4>@Resources.Resource.EditLanguage</h4>
+    </div>
+    <div class="fields">
+        <div class="select-style">
+            <select name="CodeLanguage">
+                <option disabled selected>@Resources.Resource.EditLanguage</option>
+                <option value="en">English</option>
+                <option value="be">Беларуская</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+    </div>
+    <div class="footer-form">
+        <div class="button-edit">
+            <input type="submit" value="@Resources.Resource.Save" />
+        </div>
+    </div>
+}
+</div>
+
 <div class="form-edit-nick">
     <div class="header-form">
-        <h4>Edit Nick</h4>
+        <h4>@Resources.Resource.EditNick</h4>
     </div>
     <div class="fields">
         <div class="nick-lable">
-            <label id="nick" for="nick">You New Nick</label>
+            <label id="nick" for="nick">@Resources.Resource.NewNick</label>
         </div>
         <div class="nick-input">
             <input type="text" id="field-nick" name="nick" />
@@ -24,21 +48,21 @@
         </div>
     </div>
     <div class="footer-form">
-        <div class="save"><div>Save</div></div>
+        <div class="save"><div>@Resources.Resource.Save</div></div>
     </div>
 </div>
 
 <div class="form-edit-avatar">
     <div class="header-form">
-        <h4>Edit Avatar</h4>
+        <h4>@Resources.Resource.EditAvatar</h4>
     </div>
     <div class="content-form">
         <div class="left-content-form">
             <div class="field-choose-file">
-                <label id="lable-file"><input type="file" name="file" id="file" multiple accept="image/*" /><i class="fa fa-file-image-o"></i>Choose image</label>
+                <label id="lable-file"><input type="file" name="file" id="file" multiple accept="image/*" /><i class="fa fa-file-image-o"></i>@Resources.Resource.ChooseImage</label>
             </div>
             <div class="field-submit">
-                <input type="submit" id="upload" value="Upload" disabled />
+                <input type="submit" id="upload" value="@Resources.Resource.Upload" disabled />
             </div>
         </div>
         <div class="right-content-form">

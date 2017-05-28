@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_gellary.Filters;
 using Web_gellary.Models;
 
 namespace Web_gellary.Controllers
 {
+    [Language]
     public class GalleryController : Controller
     {
         private static string UserId;
