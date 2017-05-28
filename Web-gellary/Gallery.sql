@@ -3,16 +3,17 @@
 USE Gallery;
 
 CREATE TABLE [Users] (
-    [Id]         INT           IDENTITY (1, 1) NOT NULL,
-    [UserURL]    AS            (right('000000000'+CONVERT([varchar](9),[Id]),(9))) PERSISTED,
-    [Email]      VARCHAR (40)  NOT NULL,
-    [Nick]       VARCHAR (30)  NOT NULL,
-    [Password]   VARCHAR (255) NOT NULL,
-    [Avatar]     VARCHAR (255) DEFAULT ('http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png') NULL,
-    [State]      VARCHAR (20)  DEFAULT ('online') NULL,
-    [Permission] INT           DEFAULT ((10)) NOT NULL,
-    [Role]       VARCHAR (20)  DEFAULT ('User') NOT NULL,
-    [Status]     VARCHAR (255) NULL,
+    [Id]           INT           IDENTITY (1, 1) NOT NULL,
+    [UserURL]      AS            (right('000000000'+CONVERT([varchar](9),[Id]),(9))) PERSISTED,
+    [Email]        VARCHAR (40)  NOT NULL,
+    [Nick]         VARCHAR (30)  NOT NULL,
+    [Password]     VARCHAR (255) NOT NULL,
+    [Avatar]       VARCHAR (255) DEFAULT ('http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png') NULL,
+    [State]        VARCHAR (20)  DEFAULT ('online') NULL,
+    [Permission]   INT           DEFAULT ((10)) NOT NULL,
+    [Role]         VARCHAR (20)  DEFAULT ('User') NOT NULL,
+    [Status]       VARCHAR (255) NULL,
+    [CodeLanguage] VARCHAR (5)   DEFAULT ('en') NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     UNIQUE NONCLUSTERED ([Email] ASC)
 );
