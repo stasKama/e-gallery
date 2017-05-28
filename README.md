@@ -5,16 +5,17 @@
 <pre>
   <code>
   CREATE TABLE [Users] (
-    [Id]         INT           IDENTITY (1, 1) NOT NULL,
-    [UserURL]    AS            (right('000000000'+CONVERT([varchar](9),[Id]),(9))) PERSISTED,
-    [Email]      VARCHAR (40)  NOT NULL,
-    [Nick]       VARCHAR (30)  NOT NULL,
-    [Password]   VARCHAR (255) NOT NULL,
-    [Avatar]     VARCHAR (255) DEFAULT ('http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png') NULL,
-    [State]      VARCHAR (20)  DEFAULT ('online') NULL,
-    [Permission] INT           DEFAULT ((10)) NOT NULL,
-    [Role]       VARCHAR (20)  DEFAULT ('User') NOT NULL,
-    [Status]     VARCHAR (255) NULL,
+    [Id]           INT           IDENTITY (1, 1) NOT NULL,
+    [UserURL]      AS            (right('000000000'+CONVERT([varchar](9),[Id]),(9))) PERSISTED,
+    [Email]        VARCHAR (40)  NOT NULL,
+    [Nick]         VARCHAR (30)  NOT NULL,
+    [Password]     VARCHAR (255) NOT NULL,
+    [Avatar]       VARCHAR (255) DEFAULT ('http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png') NULL,
+    [State]        VARCHAR (20)  DEFAULT ('online') NULL,
+    [Permission]   INT           DEFAULT ((10)) NOT NULL,
+    [Role]         VARCHAR (20)  DEFAULT ('User') NOT NULL,
+    [Status]       VARCHAR (255) NULL,
+    [CodeLanguage] VARCHAR (5)   DEFAULT ('en') NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     UNIQUE NONCLUSTERED ([Email] ASC)
   );
@@ -29,7 +30,7 @@
 <p>Images uploaded by the Moderators  immediately are available to the public view.</p>
 <p>The User has limit of the number of blocked and deleted images by the Moderator.</p>
 <p>Each user can place a status on his page.</p>
-<p>User can  edit  Nick, Avatar, Status and Password.</p>
+<p>User can  edit CodeLanguage, Nick, Avatar, Status and Password.</p>
 <p>User can view all users with a search by Nick, filter for the availability of Avatar or who is online at the moment and sort by popularity (Popularity calculates the total number of all the likes divided by the number of images uploaded by the user).</p>
 <br/>
 
@@ -172,7 +173,10 @@
 <img src="https://pp.userapi.com/c836322/v836322646/39cfe/feUw93yA3YQ.jpg"/>
 
 <b>Edit Page</b>
-<img src="https://pp.userapi.com/c836322/v836322646/39cd8/IPyYCag2d5A.jpg"/>
+<img src="https://pp.userapi.com/c837138/v837138646/539b2/bByKaMrxYOU.jpg"/>
+
+<b>Edit Page if select Belarusian Language</b>
+<img src="https://pp.userapi.com/c837138/v837138646/539bc/JKqJb2EbSHU.jpg"/>
 
 <b>View Image</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39d12/6JrMooAVUFU.jpg"/>
