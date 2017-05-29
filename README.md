@@ -163,6 +163,9 @@
 <b>Registration Page</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39cf4/apuf_W5XOWI.jpg"/>
 
+<b>Varerification Page</b>
+<img src="https://pp.userapi.com/c837138/v837138646/53d93/kcSZ9iisLUU.jpg"/>
+
 <b>Users Page</b>
 <img src="https://pp.userapi.com/c836322/v836322646/39d08/GBlCJb0BWSQ.jpg"/>
 
