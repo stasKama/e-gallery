@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section head {
+    <link href="~/Styles/greeting-message.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>@Resources.Resource.GreetingMessageHeader</h2>
+
+<div>@Resources.Resource.GreetingMessage</div>

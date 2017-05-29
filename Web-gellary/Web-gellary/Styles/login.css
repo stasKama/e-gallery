@@ -1,4 +1,4 @@
-﻿.form-login-user {
+﻿.form-login-user, .form-verification-user {
     width: 400px;
     height: 250px;
 }
@@ -8,7 +8,7 @@
     height: 400px;
 }
 
-.form-registration-user, .form-login-user {
+.form-registration-user, .form-login-user, .form-verification-user {
     color: #44678f;
     font-family: Arial;
     font-size: 15px;

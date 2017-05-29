@@ -37,10 +37,18 @@ namespace Web_gellary.Controllers
                 {
                     user.State = "online";
                     db.SaveChanges();
-                    FormsAuthentication.SetAuthCookie(user.UserURL, false);
                     Response.Cookies.Add(EditLanguageUserPage.EditLanguage(user.CodeLanguage, Request.Cookies["lang"]));
-                    return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
-                        new { controller = "Gallery", action = "Home", id = user.UserURL }));
+                    if (user.Verification.Count == 0)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.UserURL, false);
+                        return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
+                            new { controller = "Gallery", action = "Home", id = user.UserURL }));
+                    }
+                    else
+                    {
+                        Session["UserUrl"] = user.UserURL;
+                        return RedirectToAction("Verification");
+                    }
                 }
                 else
                 {
@@ -79,10 +87,10 @@ namespace Web_gellary.Controllers
                         user = new Users() { Email = account.Email, Password = account.Password, Nick = account.Username };
                         db.Users.Add(user);
                         db.SaveChanges();
-                        FormsAuthentication.SetAuthCookie(user.UserURL, false);
+                        Session["UserUrl"] = user.UserURL;
                         ModelState.Clear();
-                        return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
-                            new { controller = "Gallery", action = "Home", id = user.UserURL }));
+                        SendEmail.SendVerificationCode(user.Email, user.Nick, user.Id);
+                        return RedirectToAction("Verification");
                     }
                     else
                     {
@@ -103,6 +111,47 @@ namespace Web_gellary.Controllers
             db.SaveChanges();
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
+        }
+
+        public ActionResult Verification()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Home", "Gallery", new RouteValueDictionary(
+                    new { controller = "Gallery", action = "Home", id = User.Identity.Name }));
+            }
+            if (Session["UserUrl"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Verification(string VerificationCode)
+        {
+            EGalleryEntities db = new EGalleryEntities();
+            int id = Int32.Parse(Session["UserUrl"].ToString());
+            Verification verification = db.Verification.FirstOrDefault(v => v.UserId == id && v.VerificationCode == VerificationCode);
+            if (verification != null)
+            {
+                db.Verification.Remove(verification);
+                db.SaveChanges();
+                FormsAuthentication.SetAuthCookie(Session["UserUrl"].ToString(), false);
+                Session.Remove("UserUrl");
+                return RedirectToAction("Greeting");
+            }
+            else
+            {
+                ModelState.AddModelError("VerificationCode", Resources.Resource.VerificationCode);
+                return View();
+            }
+        }
+
+        [Authorize]
+        public ActionResult Greeting()
+        {
+            return View();
         }
     }
 }

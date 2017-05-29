@@ -279,4 +279,22 @@
   <data name="EditLanguage" xml:space="preserve">
     <value>Edit Language</value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Verification" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>Invalid verification code.</value>
+  </data>
+  <data name="VerificationCodeName" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="GreetingMessage" xml:space="preserve">
+    <value>Upload, look through, put likes and comment the images.</value>
+  </data>
+  <data name="GreetingMessageHeader" xml:space="preserve">
+    <value>Welcome to E-Gallery</value>
+  </data>
 </root>

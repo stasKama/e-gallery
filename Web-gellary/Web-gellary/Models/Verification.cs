@@ -11,11 +11,13 @@ namespace Web_gellary.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Verification
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        [Display(Name = "VerificationCodeName", ResourceType = typeof(Resources.Resource))]
         public string VerificationCode { get; set; }
     
         public virtual Users Users { get; set; }

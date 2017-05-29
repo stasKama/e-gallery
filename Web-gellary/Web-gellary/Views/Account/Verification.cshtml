@@ -1,0 +1,36 @@
+﻿@model Web_gellary.Models.Verification
+
+@{
+    ViewBag.Title = "Verification Code";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section head {
+    <link href="~/Styles/login.css" rel="stylesheet" type="text/css" />
+}
+
+@using (Html.BeginForm("Verification", "Account", new { enctype = "multipart/form-data" }, FormMethod.Post, htmlAttributes: new { @class = "form-verification-user" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="">
+        <h4>@Resources.Resource.Verification</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "" })
+        <div class="field">
+            <div class="lable">
+                @Html.LabelFor(model => model.VerificationCode, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="input">
+                @Html.EditorFor(model => model.VerificationCode, new { htmlAttributes = new { placeholder = Resources.Resource.VerificationCodeName, @class = "" } })
+            </div>
+        </div>
+
+        <div class="button-form">
+            <input type="submit" value="@Resources.Resource.Send" />
+        </div>
+        <div class="message">
+            @Html.ValidationMessageFor(model => model.VerificationCode, "", new { @class = "decoration-message" })
+        </div>
+    </div>
+}

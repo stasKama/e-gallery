@@ -232,6 +232,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Upload, look through, put likes and comment the images..
+        /// </summary>
+        public static string GreetingMessage {
+            get {
+                return ResourceManager.GetString("GreetingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Welcome to E-Gallery.
+        /// </summary>
+        public static string GreetingMessageHeader {
+            get {
+                return ResourceManager.GetString("GreetingMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Answers User.
         /// </summary>
         public static string HeaderAnswersPage {
@@ -484,6 +502,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Send.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Upload.
         /// </summary>
         public static string Upload {
@@ -534,6 +561,33 @@ namespace Resources {
         public static string ValidationPassword {
             get {
                 return ResourceManager.GetString("ValidationPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Verification.
+        /// </summary>
+        public static string Verification {
+            get {
+                return ResourceManager.GetString("Verification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid verification code..
+        /// </summary>
+        public static string VerificationCode {
+            get {
+                return ResourceManager.GetString("VerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Verification Code.
+        /// </summary>
+        public static string VerificationCodeName {
+            get {
+                return ResourceManager.GetString("VerificationCodeName", resourceCulture);
             }
         }
         

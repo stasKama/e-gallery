@@ -1,0 +1,14 @@
+﻿div {
+    font-size: 15px;
+    margin: 10px;
+}
+
+h2 {
+    font-size: 19px;
+    margin: 20px;
+}
+
+div, h2 {
+    color: #44678f;
+    font-family: Arial;
+}

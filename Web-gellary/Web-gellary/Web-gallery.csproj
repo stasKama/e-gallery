@@ -86,6 +86,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -167,6 +168,7 @@
     <Content Include="Styles\edit-profile.css" />
     <Content Include="Styles\error-page.css" />
     <Content Include="Styles\gallery.css" />
+    <Content Include="Styles\greeting-message.css" />
     <Content Include="Styles\history-view-image.css" />
     <Content Include="Styles\layout.css" />
     <Content Include="Styles\login.css" />
@@ -198,6 +200,7 @@
       <DependentUpon>GalleryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EditLanguageUserPage.cs" />
+    <Compile Include="Models\SendEmail.cs" />
     <Compile Include="Models\UpdatePassword.cs" />
     <Compile Include="Models\GalleryModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -276,6 +279,8 @@
     </Content>
     <Content Include="Views\Edit\EditPassword.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Account\Verification.cshtml" />
+    <Content Include="Views\Account\Greeting.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
