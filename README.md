@@ -146,7 +146,8 @@
   </code>
 </pre>
 
-<p>In developing.</p>
+<p>When the user registers, the verification code is sent to the user email.</p>
+<p>The user will not be active until the code is entered.</p>
 
 <br/>
 
