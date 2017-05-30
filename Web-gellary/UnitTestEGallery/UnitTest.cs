@@ -117,10 +117,10 @@ namespace UnitTestEGallery
             driver.FindElement(By.Name("ConfirmPassword")).SendKeys("1qazxsW2");
             driver.FindElementByClassName("form-registration-user").Submit();
 
-            Assert.AreEqual(true, driver.Url.Contains(EGalleryUrl + "Gallery/Home/"), "Test registration user");
+            Assert.AreEqual(EGalleryUrl + "Account/Verification", driver.Url, "Test registration user");
             driver.Quit();
         }
-
+        
         [Test]
         public void TestGalleryUser()
         {
