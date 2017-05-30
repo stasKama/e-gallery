@@ -37,7 +37,7 @@ CREATE TABLE [Answers] (
     [Date]      DATE          DEFAULT (getdate()) NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
     UNIQUE NONCLUSTERED ([PictureId] ASC),
-    FOREIGN KEY ([PictureId]) REFERENCES [PicturesWaiting] ([Id]) ON DELETE CASCADE,
+    FOREIGN KEY ([PictureId]) REFERENCES [PicturesWaiting] ([Id]),
     FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE [CommentsToImages] (
     [Comment]     VARCHAR (300) NOT NULL,
     [DateComment] DATE          DEFAULT (getdate()) NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]) ON DELETE CASCADE,
+    FOREIGN KEY ([ImageId]) REFERENCES [Images] ([Id]),
     FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
 );
 
@@ -77,6 +77,9 @@ CREATE TABLE [Verification] (
     [Id]               INT         IDENTITY (1, 1) NOT NULL,
     [UserId]           INT         NOT NULL,
     [VerificationCode] VARCHAR (8) NOT NULL,
+    [NumberAttempts] INT DEFAULT(4),
+    [DateRegistration] DATE         DEFAULT (getdate()) NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
+    UNIQUE([UserId]),
     FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
 );
