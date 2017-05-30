@@ -47,7 +47,7 @@ namespace Web_gellary.Controllers
                     else
                     {
                         Session["UserUrl"] = user.UserURL;
-                        return RedirectToAction("Verification");
+                        return View("Verification");
                     }
                 }
                 else
@@ -90,7 +90,7 @@ namespace Web_gellary.Controllers
                         Session["UserUrl"] = user.UserURL;
                         ModelState.Clear();
                         SendEmail.SendVerificationCode(user.Email, user.Nick, user.Id);
-                        return RedirectToAction("Verification");
+                        return View("Verification");
                     }
                     else
                     {
@@ -110,7 +110,7 @@ namespace Web_gellary.Controllers
             user.State = "offline";
             db.SaveChanges();
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login");
+            return View("Login");
         }
 
         public ActionResult Verification()
@@ -122,7 +122,7 @@ namespace Web_gellary.Controllers
             }
             if (Session["UserUrl"] == null)
             {
-                return RedirectToAction("Login");
+                return View("Login");
             }
             return View();
         }
@@ -132,17 +132,25 @@ namespace Web_gellary.Controllers
         {
             EGalleryEntities db = new EGalleryEntities();
             int id = Int32.Parse(Session["UserUrl"].ToString());
-            Verification verification = db.Verification.FirstOrDefault(v => v.UserId == id && v.VerificationCode == VerificationCode);
-            if (verification != null)
+            Verification verification = db.Verification.FirstOrDefault(v => v.UserId == id);
+            if (verification.VerificationCode == VerificationCode)
             {
                 db.Verification.Remove(verification);
                 db.SaveChanges();
                 FormsAuthentication.SetAuthCookie(Session["UserUrl"].ToString(), false);
                 Session.Remove("UserUrl");
-                return RedirectToAction("Greeting");
+                return View("Greeting");
             }
             else
             {
+                if ((--verification.NumberAttempts) == 0)
+                {
+                    Users User = db.Users.FirstOrDefault(u => u.Id == id);
+                    db.Users.Remove(User);
+                    db.SaveChanges();
+                    return View("Login");
+                }
+                db.SaveChanges();
                 ModelState.AddModelError("VerificationCode", Resources.Resource.VerificationCode);
                 return View();
             }

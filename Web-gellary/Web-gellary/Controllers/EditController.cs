@@ -23,7 +23,10 @@ namespace Web_gellary.Controllers
         {
             EGalleryEntities db = new EGalleryEntities();
             var user = db.Users.FirstOrDefault(u => u.UserURL == User.Identity.Name);
-            System.IO.File.Delete(GetPathToImg(user.Avatar, "avatar"));
+            if (user.Avatar != "http://www.teniteatr.ru/assets/no_avatar-e557002f44d175333089815809cf49ce.png")
+            {
+                System.IO.File.Delete(GetPathToImg(user.Avatar, "avatar"));
+            }
             ImageSave.Save(fileData, GetPathToImg(user.UserURL + "." + expansion, "avatar"));
             user.Avatar = Url.Content("~/Images/avatar/" + user.UserURL + "." + expansion);
             db.SaveChanges();

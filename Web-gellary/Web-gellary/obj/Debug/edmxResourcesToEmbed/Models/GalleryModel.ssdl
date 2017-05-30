@@ -36,7 +36,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" />
     <Property Name="ImageId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PicturesWaiting">
@@ -73,8 +73,10 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="VerificationCode" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="NumberAttempts" Type="int" />
+    <Property Name="DateRegistration" Type="date" />
   </EntityType>
-  <Association Name="FK__Answers__Picture__531856C7">
+  <Association Name="FK__Answers__Picture__603D47BB">
     <End Role="PicturesWaiting" Type="Self.PicturesWaiting" Multiplicity="1" />
     <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
     <ReferentialConstraint>
@@ -86,8 +88,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Answers__UserId__540C7B00">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__Answers__UserId__6225902D">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -98,7 +102,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__Image__2A164134">
+  <Association Name="FK__CommentsT__Image__753864A1">
     <End Role="Images" Type="Self.Images" Multiplicity="1" />
     <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -110,8 +114,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__UserI__2B0A656D">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__CommentsT__UserI__762C88DA">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -122,8 +128,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Images__UserId__1AD3FDA4">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__Images__UserId__67DE6983">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Images" Type="Self.Images" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -134,8 +142,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__Image__2EDAF651">
-    <End Role="Images" Type="Self.Images" Multiplicity="1" />
+  <Association Name="FK__LikesToIm__Image__6BAEFA67">
+    <End Role="Images" Type="Self.Images" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Images">
@@ -146,8 +156,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__UserI__2FCF1A8A">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__LikesToIm__UserI__6CA31EA0">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -158,8 +168,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PicturesW__UserI__503BEA1C">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__PicturesW__UserI__5006DFF2">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="PicturesWaiting" Type="Self.PicturesWaiting" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -170,8 +182,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Verificat__UserI__5070F446">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__Verificat__UserI__7BE56230">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Verification" Type="Self.Verification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -190,39 +204,39 @@
     <EntitySet Name="PicturesWaiting" EntityType="Self.PicturesWaiting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verification" EntityType="Self.Verification" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Answers__Picture__531856C7" Association="Self.FK__Answers__Picture__531856C7">
+    <AssociationSet Name="FK__Answers__Picture__603D47BB" Association="Self.FK__Answers__Picture__603D47BB">
       <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
       <End Role="Answers" EntitySet="Answers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Answers__UserId__540C7B00" Association="Self.FK__Answers__UserId__540C7B00">
+    <AssociationSet Name="FK__Answers__UserId__6225902D" Association="Self.FK__Answers__UserId__6225902D">
       <End Role="Users" EntitySet="Users" />
       <End Role="Answers" EntitySet="Answers" />
     </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__Image__2A164134" Association="Self.FK__CommentsT__Image__2A164134">
+    <AssociationSet Name="FK__CommentsT__Image__753864A1" Association="Self.FK__CommentsT__Image__753864A1">
       <End Role="Images" EntitySet="Images" />
       <End Role="CommentsToImages" EntitySet="CommentsToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__UserI__2B0A656D" Association="Self.FK__CommentsT__UserI__2B0A656D">
+    <AssociationSet Name="FK__CommentsT__UserI__762C88DA" Association="Self.FK__CommentsT__UserI__762C88DA">
       <End Role="Users" EntitySet="Users" />
       <End Role="CommentsToImages" EntitySet="CommentsToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__Images__UserId__1AD3FDA4" Association="Self.FK__Images__UserId__1AD3FDA4">
+    <AssociationSet Name="FK__Images__UserId__67DE6983" Association="Self.FK__Images__UserId__67DE6983">
       <End Role="Users" EntitySet="Users" />
       <End Role="Images" EntitySet="Images" />
     </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__Image__2EDAF651" Association="Self.FK__LikesToIm__Image__2EDAF651">
+    <AssociationSet Name="FK__LikesToIm__Image__6BAEFA67" Association="Self.FK__LikesToIm__Image__6BAEFA67">
       <End Role="Images" EntitySet="Images" />
       <End Role="LikesToImages" EntitySet="LikesToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__UserI__2FCF1A8A" Association="Self.FK__LikesToIm__UserI__2FCF1A8A">
+    <AssociationSet Name="FK__LikesToIm__UserI__6CA31EA0" Association="Self.FK__LikesToIm__UserI__6CA31EA0">
       <End Role="Users" EntitySet="Users" />
       <End Role="LikesToImages" EntitySet="LikesToImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__PicturesW__UserI__503BEA1C" Association="Self.FK__PicturesW__UserI__503BEA1C">
+    <AssociationSet Name="FK__PicturesW__UserI__5006DFF2" Association="Self.FK__PicturesW__UserI__5006DFF2">
       <End Role="Users" EntitySet="Users" />
       <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
     </AssociationSet>
-    <AssociationSet Name="FK__Verificat__UserI__5070F446" Association="Self.FK__Verificat__UserI__5070F446">
+    <AssociationSet Name="FK__Verificat__UserI__7BE56230" Association="Self.FK__Verificat__UserI__7BE56230">
       <End Role="Users" EntitySet="Users" />
       <End Role="Verification" EntitySet="Verification" />
     </AssociationSet>

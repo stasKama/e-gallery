@@ -4,55 +4,55 @@
     <EntitySetMapping Name="Answers">
       <EntityTypeMapping TypeName="GalleryModel.Answers">
         <MappingFragment StoreEntitySet="Answers">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="PictureId" ColumnName="PictureId" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CommentsToImages">
       <EntityTypeMapping TypeName="GalleryModel.CommentsToImages">
         <MappingFragment StoreEntitySet="CommentsToImages">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="DateComment" ColumnName="DateComment" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Images">
       <EntityTypeMapping TypeName="GalleryModel.Images">
         <MappingFragment StoreEntitySet="Images">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Expansion" ColumnName="Expansion" />
-          <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
-          <ScalarProperty Name="CountView" ColumnName="CountView" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CountView" ColumnName="CountView" />
+          <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
+          <ScalarProperty Name="Expansion" ColumnName="Expansion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LikesToImages">
       <EntityTypeMapping TypeName="GalleryModel.LikesToImages">
         <MappingFragment StoreEntitySet="LikesToImages">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PicturesWaiting">
       <EntityTypeMapping TypeName="GalleryModel.PicturesWaiting">
         <MappingFragment StoreEntitySet="PicturesWaiting">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
           <ScalarProperty Name="Expansion" ColumnName="Expansion" />
+          <ScalarProperty Name="DateUpload" ColumnName="DateUpload" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -60,25 +60,27 @@
       <EntityTypeMapping TypeName="GalleryModel.Users">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="CodeLanguage" ColumnName="CodeLanguage" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserURL" ColumnName="UserURL" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Nick" ColumnName="Nick" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="Permission" ColumnName="Permission" />
-          <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Nick" ColumnName="Nick" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserURL" ColumnName="UserURL" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Verification">
       <EntityTypeMapping TypeName="GalleryModel.Verification">
         <MappingFragment StoreEntitySet="Verification">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DateRegistration" ColumnName="DateRegistration" />
+          <ScalarProperty Name="NumberAttempts" ColumnName="NumberAttempts" />
           <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

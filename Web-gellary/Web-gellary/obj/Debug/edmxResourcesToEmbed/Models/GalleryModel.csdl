@@ -1,5 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GalleryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EGalleryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Answers" EntityType="GalleryModel.Answers" />
+    <EntitySet Name="CommentsToImages" EntityType="GalleryModel.CommentsToImages" />
+    <EntitySet Name="Images" EntityType="GalleryModel.Images" />
+    <EntitySet Name="LikesToImages" EntityType="GalleryModel.LikesToImages" />
+    <EntitySet Name="PicturesWaiting" EntityType="GalleryModel.PicturesWaiting" />
+    <EntitySet Name="Users" EntityType="GalleryModel.Users" />
+    <EntitySet Name="Verification" EntityType="GalleryModel.Verification" />
+    <AssociationSet Name="FK__Answers__Picture__603D47BB" Association="GalleryModel.FK__Answers__Picture__603D47BB">
+      <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Answers__UserId__6225902D" Association="GalleryModel.FK__Answers__UserId__6225902D">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentsT__Image__753864A1" Association="GalleryModel.FK__CommentsT__Image__753864A1">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="CommentsToImages" EntitySet="CommentsToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentsT__UserI__762C88DA" Association="GalleryModel.FK__CommentsT__UserI__762C88DA">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CommentsToImages" EntitySet="CommentsToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__UserId__67DE6983" Association="GalleryModel.FK__Images__UserId__67DE6983">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LikesToIm__Image__6BAEFA67" Association="GalleryModel.FK__LikesToIm__Image__6BAEFA67">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="LikesToImages" EntitySet="LikesToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LikesToIm__UserI__6CA31EA0" Association="GalleryModel.FK__LikesToIm__UserI__6CA31EA0">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LikesToImages" EntitySet="LikesToImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PicturesW__UserI__5006DFF2" Association="GalleryModel.FK__PicturesW__UserI__5006DFF2">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Verificat__UserI__7BE56230" Association="GalleryModel.FK__Verificat__UserI__7BE56230">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Verification" EntitySet="Verification" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Answers">
     <Key>
       <PropertyRef Name="Id" />
@@ -7,10 +52,10 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="PictureId" Type="Int32" Nullable="false" />
-    <Property Name="Text" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Date" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="PicturesWaiting" Relationship="Self.FK__Answers__Picture__531856C7" FromRole="Answers" ToRole="PicturesWaiting" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__Answers__UserId__540C7B00" FromRole="Answers" ToRole="Users" />
+    <NavigationProperty Name="PicturesWaiting" Relationship="GalleryModel.FK__Answers__Picture__603D47BB" FromRole="Answers" ToRole="PicturesWaiting" />
+    <NavigationProperty Name="Users" Relationship="GalleryModel.FK__Answers__UserId__6225902D" FromRole="Answers" ToRole="Users" />
   </EntityType>
   <EntityType Name="CommentsToImages">
     <Key>
@@ -19,10 +64,10 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="ImageId" Type="Int32" Nullable="false" />
-    <Property Name="Comment" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
     <Property Name="DateComment" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Images" Relationship="Self.FK__CommentsT__Image__2A164134" FromRole="CommentsToImages" ToRole="Images" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__CommentsT__UserI__2B0A656D" FromRole="CommentsToImages" ToRole="Users" />
+    <NavigationProperty Name="Images" Relationship="GalleryModel.FK__CommentsT__Image__753864A1" FromRole="CommentsToImages" ToRole="Images" />
+    <NavigationProperty Name="Users" Relationship="GalleryModel.FK__CommentsT__UserI__762C88DA" FromRole="CommentsToImages" ToRole="Users" />
   </EntityType>
   <EntityType Name="Images">
     <Key>
@@ -30,23 +75,23 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="9" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="Expansion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Expansion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="DateUpload" Type="DateTime" Precision="0" />
     <Property Name="CountView" Type="Int32" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CommentsToImages" Relationship="Self.FK__CommentsT__Image__2A164134" FromRole="Images" ToRole="CommentsToImages" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__Images__UserId__1AD3FDA4" FromRole="Images" ToRole="Users" />
-    <NavigationProperty Name="LikesToImages" Relationship="Self.FK__LikesToIm__Image__2EDAF651" FromRole="Images" ToRole="LikesToImages" />
+    <NavigationProperty Name="CommentsToImages" Relationship="GalleryModel.FK__CommentsT__Image__753864A1" FromRole="Images" ToRole="CommentsToImages" />
+    <NavigationProperty Name="Users" Relationship="GalleryModel.FK__Images__UserId__67DE6983" FromRole="Images" ToRole="Users" />
+    <NavigationProperty Name="LikesToImages" Relationship="GalleryModel.FK__LikesToIm__Image__6BAEFA67" FromRole="Images" ToRole="LikesToImages" />
   </EntityType>
   <EntityType Name="LikesToImages">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
     <Property Name="ImageId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Images" Relationship="Self.FK__LikesToIm__Image__2EDAF651" FromRole="LikesToImages" ToRole="Images" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__LikesToIm__UserI__2FCF1A8A" FromRole="LikesToImages" ToRole="Users" />
+    <NavigationProperty Name="Images" Relationship="GalleryModel.FK__LikesToIm__Image__6BAEFA67" FromRole="LikesToImages" ToRole="Images" />
+    <NavigationProperty Name="Users" Relationship="GalleryModel.FK__LikesToIm__UserI__6CA31EA0" FromRole="LikesToImages" ToRole="Users" />
   </EntityType>
   <EntityType Name="PicturesWaiting">
     <Key>
@@ -57,9 +102,9 @@
     <Property Name="Status" Type="Int32" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="DateUpload" Type="DateTime" Precision="0" />
-    <Property Name="Expansion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Answers" Relationship="Self.FK__Answers__Picture__531856C7" FromRole="PicturesWaiting" ToRole="Answers" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__PicturesW__UserI__503BEA1C" FromRole="PicturesWaiting" ToRole="Users" />
+    <Property Name="Expansion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Answers" Relationship="GalleryModel.FK__Answers__Picture__603D47BB" FromRole="PicturesWaiting" ToRole="Answers" />
+    <NavigationProperty Name="Users" Relationship="GalleryModel.FK__PicturesW__UserI__5006DFF2" FromRole="PicturesWaiting" ToRole="Users" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -67,21 +112,21 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserURL" Type="String" MaxLength="9" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Nick" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Nick" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Permission" Type="Int32" Nullable="false" />
-    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Answers" Relationship="Self.FK__Answers__UserId__540C7B00" FromRole="Users" ToRole="Answers" />
-    <NavigationProperty Name="CommentsToImages" Relationship="Self.FK__CommentsT__UserI__2B0A656D" FromRole="Users" ToRole="CommentsToImages" />
-    <NavigationProperty Name="Images" Relationship="Self.FK__Images__UserId__1AD3FDA4" FromRole="Users" ToRole="Images" />
-    <NavigationProperty Name="LikesToImages" Relationship="Self.FK__LikesToIm__UserI__2FCF1A8A" FromRole="Users" ToRole="LikesToImages" />
-    <NavigationProperty Name="PicturesWaiting" Relationship="Self.FK__PicturesW__UserI__503BEA1C" FromRole="Users" ToRole="PicturesWaiting" />
-    <NavigationProperty Name="Verification" Relationship="Self.FK__Verificat__UserI__5070F446" FromRole="Users" ToRole="Verification" />
     <Property Name="CodeLanguage" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Answers" Relationship="GalleryModel.FK__Answers__UserId__6225902D" FromRole="Users" ToRole="Answers" />
+    <NavigationProperty Name="CommentsToImages" Relationship="GalleryModel.FK__CommentsT__UserI__762C88DA" FromRole="Users" ToRole="CommentsToImages" />
+    <NavigationProperty Name="Images" Relationship="GalleryModel.FK__Images__UserId__67DE6983" FromRole="Users" ToRole="Images" />
+    <NavigationProperty Name="LikesToImages" Relationship="GalleryModel.FK__LikesToIm__UserI__6CA31EA0" FromRole="Users" ToRole="LikesToImages" />
+    <NavigationProperty Name="PicturesWaiting" Relationship="GalleryModel.FK__PicturesW__UserI__5006DFF2" FromRole="Users" ToRole="PicturesWaiting" />
+    <NavigationProperty Name="Verification" Relationship="GalleryModel.FK__Verificat__UserI__7BE56230" FromRole="Users" ToRole="Verification" />
   </EntityType>
   <EntityType Name="Verification">
     <Key>
@@ -89,12 +134,14 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="VerificationCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__Verificat__UserI__5070F446" FromRole="Verification" ToRole="Users" />
+    <Property Name="VerificationCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="NumberAttempts" Type="Int32" />
+    <Property Name="DateRegistration" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Users" Relationship="GalleryModel.FK__Verificat__UserI__7BE56230" FromRole="Verification" ToRole="Users" />
   </EntityType>
-  <Association Name="FK__Answers__Picture__531856C7">
-    <End Role="PicturesWaiting" Type="Self.PicturesWaiting" Multiplicity="1" />
-    <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+  <Association Name="FK__Answers__Picture__603D47BB">
+    <End Type="GalleryModel.PicturesWaiting" Role="PicturesWaiting" Multiplicity="1" />
+    <End Type="GalleryModel.Answers" Role="Answers" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PicturesWaiting">
         <PropertyRef Name="Id" />
@@ -104,9 +151,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Answers__UserId__540C7B00">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+  <Association Name="FK__Answers__UserId__6225902D">
+    <End Type="GalleryModel.Users" Role="Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GalleryModel.Answers" Role="Answers" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -116,9 +165,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__Image__2A164134">
-    <End Role="Images" Type="Self.Images" Multiplicity="1" />
-    <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
+  <Association Name="FK__CommentsT__Image__753864A1">
+    <End Type="GalleryModel.Images" Role="Images" Multiplicity="1" />
+    <End Type="GalleryModel.CommentsToImages" Role="CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Images">
         <PropertyRef Name="Id" />
@@ -128,9 +177,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CommentsT__UserI__2B0A656D">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="CommentsToImages" Type="Self.CommentsToImages" Multiplicity="*" />
+  <Association Name="FK__CommentsT__UserI__762C88DA">
+    <End Type="GalleryModel.Users" Role="Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GalleryModel.CommentsToImages" Role="CommentsToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -140,9 +191,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Images__UserId__1AD3FDA4">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+  <Association Name="FK__Images__UserId__67DE6983">
+    <End Type="GalleryModel.Users" Role="Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GalleryModel.Images" Role="Images" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -152,9 +205,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__Image__2EDAF651">
-    <End Role="Images" Type="Self.Images" Multiplicity="1" />
-    <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
+  <Association Name="FK__LikesToIm__Image__6BAEFA67">
+    <End Type="GalleryModel.Images" Role="Images" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GalleryModel.LikesToImages" Role="LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Images">
         <PropertyRef Name="Id" />
@@ -164,9 +219,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LikesToIm__UserI__2FCF1A8A">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="LikesToImages" Type="Self.LikesToImages" Multiplicity="*" />
+  <Association Name="FK__LikesToIm__UserI__6CA31EA0">
+    <End Type="GalleryModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="GalleryModel.LikesToImages" Role="LikesToImages" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -176,9 +231,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PicturesW__UserI__503BEA1C">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="PicturesWaiting" Type="Self.PicturesWaiting" Multiplicity="*" />
+  <Association Name="FK__PicturesW__UserI__5006DFF2">
+    <End Type="GalleryModel.Users" Role="Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GalleryModel.PicturesWaiting" Role="PicturesWaiting" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -188,9 +245,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Verificat__UserI__5070F446">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Verification" Type="Self.Verification" Multiplicity="*" />
+  <Association Name="FK__Verificat__UserI__7BE56230">
+    <End Type="GalleryModel.Users" Role="Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GalleryModel.Verification" Role="Verification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -200,49 +259,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="EGalleryEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Answers" EntityType="Self.Answers" />
-    <EntitySet Name="CommentsToImages" EntityType="Self.CommentsToImages" />
-    <EntitySet Name="Images" EntityType="Self.Images" />
-    <EntitySet Name="LikesToImages" EntityType="Self.LikesToImages" />
-    <EntitySet Name="PicturesWaiting" EntityType="Self.PicturesWaiting" />
-    <EntitySet Name="Users" EntityType="Self.Users" />
-    <EntitySet Name="Verification" EntityType="Self.Verification" />
-    <AssociationSet Name="FK__Answers__Picture__531856C7" Association="Self.FK__Answers__Picture__531856C7">
-      <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
-      <End Role="Answers" EntitySet="Answers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Answers__UserId__540C7B00" Association="Self.FK__Answers__UserId__540C7B00">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Answers" EntitySet="Answers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__Image__2A164134" Association="Self.FK__CommentsT__Image__2A164134">
-      <End Role="Images" EntitySet="Images" />
-      <End Role="CommentsToImages" EntitySet="CommentsToImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CommentsT__UserI__2B0A656D" Association="Self.FK__CommentsT__UserI__2B0A656D">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="CommentsToImages" EntitySet="CommentsToImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Images__UserId__1AD3FDA4" Association="Self.FK__Images__UserId__1AD3FDA4">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Images" EntitySet="Images" />
-    </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__Image__2EDAF651" Association="Self.FK__LikesToIm__Image__2EDAF651">
-      <End Role="Images" EntitySet="Images" />
-      <End Role="LikesToImages" EntitySet="LikesToImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__LikesToIm__UserI__2FCF1A8A" Association="Self.FK__LikesToIm__UserI__2FCF1A8A">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="LikesToImages" EntitySet="LikesToImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__PicturesW__UserI__503BEA1C" Association="Self.FK__PicturesW__UserI__503BEA1C">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="PicturesWaiting" EntitySet="PicturesWaiting" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Verificat__UserI__5070F446" Association="Self.FK__Verificat__UserI__5070F446">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Verification" EntitySet="Verification" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

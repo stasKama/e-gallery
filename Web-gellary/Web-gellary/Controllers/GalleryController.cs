@@ -18,8 +18,8 @@ namespace Web_gellary.Controllers
         {
             UserId = id;
             EGalleryEntities db = new EGalleryEntities();
-            var User = db.Users.FirstOrDefault(u => u.UserURL == id);
-            return View(User);
+            var User = db.Users.FirstOrDefault(u => u.UserURL == id && u.Verification.Count == 0);
+            return User != null ? View(User) : View("Users");
         }
 
         [HttpPost]
@@ -48,7 +48,7 @@ namespace Web_gellary.Controllers
         {
             EGalleryEntities db = new EGalleryEntities();
             List<UserViewModel> UsersModel = new List<UserViewModel>();
-            foreach (var user in db.Users)
+            foreach (var user in db.Users.Where(u => u.Verification.Count == 0))
             {
                 UsersModel.Add(new UserViewModel()
                 {
@@ -67,7 +67,7 @@ namespace Web_gellary.Controllers
         {
             EGalleryEntities db = new EGalleryEntities();
             List<UserViewModel> UsersModel = new List<UserViewModel>();
-            IQueryable<Users> users = db.Users;
+            IQueryable<Users> users = db.Users.Where(u => u.Verification == null);
             if (Nick != null || Nick != "")
             {
                 users = db.Users.Where(u => u.Nick.Contains(Nick));

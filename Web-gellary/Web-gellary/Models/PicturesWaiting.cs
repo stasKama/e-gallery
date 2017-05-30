@@ -20,7 +20,7 @@ namespace Web_gellary.Models
             this.Answers = new HashSet<Answers>();
             this.DateUpload = DateTime.Now;
         }
-
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public int Status { get; set; }

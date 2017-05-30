@@ -15,7 +15,7 @@ namespace Web_gellary.Models
     public partial class LikesToImages
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public int ImageId { get; set; }
     
         public virtual Images Images { get; set; }

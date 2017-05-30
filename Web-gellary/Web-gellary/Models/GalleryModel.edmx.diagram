@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6e0d81df442f4716a2662c9bfac1b666" Name="Diagram1">
-        <EntityTypeShape EntityType="GalleryModel.Answers" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryModel.CommentsToImages" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryModel.Images" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryModel.LikesToImages" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryModel.PicturesWaiting" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryModel.Users" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GalleryModel.Verification" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
-        <AssociationConnector Association="GalleryModel.FK__Answers__Picture__531856C7" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__Answers__UserId__540C7B00" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__CommentsT__Image__2A164134" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__CommentsT__UserI__2B0A656D" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__Images__UserId__1AD3FDA4" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__LikesToIm__Image__2EDAF651" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__LikesToIm__UserI__2FCF1A8A" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__PicturesW__UserI__503BEA1C" ManuallyRouted="false" />
-        <AssociationConnector Association="GalleryModel.FK__Verificat__UserI__5070F446" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GalleryModel.Answers" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="GalleryModel.CommentsToImages" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="GalleryModel.Images" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="GalleryModel.LikesToImages" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="GalleryModel.PicturesWaiting" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="GalleryModel.Users" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="GalleryModel.Verification" Width="1.5" PointX="3" PointY="17.75" />
+        <AssociationConnector Association="GalleryModel.FK__Answers__Picture__603D47BB" />
+        <AssociationConnector Association="GalleryModel.FK__Answers__UserId__6225902D" />
+        <AssociationConnector Association="GalleryModel.FK__CommentsT__Image__753864A1" />
+        <AssociationConnector Association="GalleryModel.FK__CommentsT__UserI__762C88DA" />
+        <AssociationConnector Association="GalleryModel.FK__Images__UserId__67DE6983" />
+        <AssociationConnector Association="GalleryModel.FK__LikesToIm__Image__6BAEFA67" />
+        <AssociationConnector Association="GalleryModel.FK__LikesToIm__UserI__6CA31EA0" />
+        <AssociationConnector Association="GalleryModel.FK__PicturesW__UserI__5006DFF2" />
+        <AssociationConnector Association="GalleryModel.FK__Verificat__UserI__7BE56230" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
